@@ -2,6 +2,15 @@
 # and the full /writeups/ archive page. Add a new entry per write-up;
 # it appears in both places automatically, sorted by date (newest first).
 # difficulty must be one of: easy | medium | hard | insane  (badge colour)
+#
+# STAGING active boxes (hide until retirement):
+#   - add  hidden: true  to an entry  ->  its card is pulled from the home page
+#     and the /writeups/ archive, and it drops out of search. Metadata only.
+#   - keep the write-up PAGE in _drafts/ (Jekyll never builds _drafts/), so no
+#     public URL exists while the box is still active. For strict compliance,
+#     push that draft only to the private 'staging' remote, never to public.
+#   - RELEASE when the box retires: move the page into _posts/ dated retire+7,
+#     then delete the  hidden: true  line (or set hidden: false) and push.
 
 - box: RopeTwo
   difficulty: Insane
@@ -996,3 +1005,11 @@
   date: 2022-03-07
   tags: "jenkins · credential-decrypt · acl-abuse"
   blurb: "A firewalled Jenkins runs your commands but can never call home, so you read its output from files, decrypt its stored secrets, then walk an Active Directory permission chain to Domain Admin."
+
+- box: ZZTOPSECRET
+  difficulty: Insane
+  url: /9999/01/01/staged-self-test.html
+  date: 2099-01-01
+  tags: "staged · hidden · selftest"
+  blurb: "Temporary hidden entry to prove the staging filter. Must never render publicly."
+  hidden: true

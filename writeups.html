@@ -14,7 +14,7 @@ description: "Hack The Box write-ups — the full archive, newest first. Search 
 </div>
 
 <div class="grid" id="wugrid">
-  {% assign wus = site.data.writeups | sort: "date" | reverse %}
+  {% assign wus = site.data.writeups | where_exp: "w", "w.hidden != true" | sort: "date" | reverse %}
   {% for wu in wus %}{% include writeup-card.html wu=wu %}
   {% endfor %}
 </div>
