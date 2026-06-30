@@ -17,6 +17,7 @@
   url: /2021/01/23/all-the-way-down.html
   date: 2021-01-23
   tags: "browser-exploit · heap · kernel"
+  chain: "recon gitlab source-review xss v8-exploit suid use-after-free tcache-poisoning kernel-exploit rop"
   blurb: "Three exploits stacked into one Insane box. Break a patched V8 engine for a shell, corrupt a SUID binary's heap for a user, then pwn the kernel heap for root."
 
 - box: Sniper
@@ -24,6 +25,7 @@
   url: /2020/04/04/return-to-sender.html
   date: 2020-04-04
   tags: "rfi · smb · chm-poisoning"
+  chain: "recon web-enum lfi rfi smb webshell config-leak cred-reuse chm-payload"
   blurb: "Make the web app fetch your payload off your own SMB share for a shell, reuse a database password to become Chris, then mail the admin a booby-trapped CHM help file for Administrator."
 
 - box: Tabby
@@ -31,6 +33,7 @@
   url: /2020/11/14/mount-the-world.html
   date: 2020-11-14
   tags: "lfi · tomcat · lxd"
+  chain: "recon web-enum lfi config-leak tomcat war-deploy rce hash-cracking cred-reuse lxd"
   blurb: "An LFI leaks Tomcat creds, a malicious WAR opens a shell, then the lxd group hands you the whole host — build a container, mount the disk, walk in as root."
 
 - box: Valentine
@@ -38,6 +41,7 @@
   url: /2018/08/04/bleeding-heart.html
   date: 2018-08-04
   tags: "heartbleed · ssh-key · dirtycow"
+  chain: "enumeration heartbleed cve-2014-0160 openssl tmux dirtycow cve-2016-5195"
   blurb: "Heartbleed bleeds a passphrase out of server memory, an encrypted SSH key turns it into a foothold, then root falls twice — a forgotten root tmux session and the DirtyCow kernel bug."
 
 - box: Falafel
@@ -45,27 +49,31 @@
   url: /2018/06/30/every-password-at-once.html
   date: 2018-06-30
   tags: "sqli · type-juggling · framebuffer"
+  chain: "recon web-enum user-enumeration blind-sqli hash-cracking type-juggling auth-bypass file-upload config-leak cred-reuse disk-group-debugfs"
   blurb: "A PHP magic-hash that equals every number you throw at it, a filename too long to keep its disguise, a screenshot stolen from the framebuffer, and root read straight off the raw disk."
 
 - box: Forest
   difficulty: Easy
   url: /forest.html
   date: 2020-03-22
-  tags: "active-directory · as-rep-roast · dcsync"
+  tags: "as-rep-roast · acl-abuse · dcsync"
+  chain: "recon rpc as-rep-roast hash-cracking evil-winrm bloodhound acl-abuse ntlm-relay privexchange dcsync"
   blurb: "Active Directory misconfigs: AS-REP roast a service account for a foothold, then an ACL path through an Exchange group for DCSync rights."
 
 - box: JSON
   difficulty: Medium
   url: /json.html
   date: 2020-03-22
-  tags: "json-deserialization · rce · juicypotato"
+  tags: "deserialization · rce · juicypotato"
+  chain: "recon web-enum default-creds insecure-deserialization objectdataprovider-gadget rce seimpersonate juicy-potato"
   blurb: "Medium box: a JSON deserialization flaw plus a Bearer header gets RCE, then SeImpersonatePrivilege + JuicyPotato for SYSTEM."
 
 - box: Bankrobber
   difficulty: Insane
   url: /bankrobber.html
   date: 2020-03-15
-  tags: "web · owasp-top-10 · binary-exploitation"
+  tags: "blind-xss · ssrf · bof"
+  chain: "recon web-enum xss sqli hash-cracking ssrf rce brute-force tunneling bof"
   blurb: "An insane web-app box: chain OWASP Top-10 issues for a user shell, then some basic binary exploitation to escalate to root."
 
 - box: Lame
@@ -73,6 +81,7 @@
   url: /2017/06/02/the-username-was-the-weapon.html
   date: 2017-06-02
   tags: "samba · cve-2007-2447 · rce"
+  chain: "enumeration vsftpd cve-2011-2523 samba cve-2007-2447 command-injection distccd cve-2004-2687 suid"
   blurb: "Lame is box number one, and it teaches the oldest lesson there is: a login field that runs your shell."
 
 - box: Legacy
@@ -80,6 +89,7 @@
   url: /2017/06/02/the-box-that-forgot-to-get-old.html
   date: 2017-06-02
   tags: "smb · ms17-010 · ms08-067"
+  chain: "enumeration ms08-067 cve-2008-4250 bof ms17-010 cve-2017-0143 eternalblue kernel-exploit"
   blurb: "A Windows XP box that never patched the two SMB bugs worms were built from, exploited by hand with no Metasploit."
 
 - box: Blue
@@ -87,6 +97,7 @@
   url: /2018/01/20/the-door-that-was-never-locked.html
   date: 2018-01-20
   tags: "smb · eternalblue · ms17-010"
+  chain: "recon smbv1 cve-2017-0143 eternalblue buffer-overflow kernel-exploit rce"
   blurb: "One unpatched SMB service, one kernel-level RCE, and Blue hands you the whole machine before you have time to enumerate anything."
 
 - box: Optimum
@@ -94,6 +105,7 @@
   url: /2017/11/04/two-patches-late.html
   date: 2017-11-04
   tags: "hfs · rce · ms16-032"
+  chain: "recon hfs cve-2014-6287 rce reverse-shell sherlock kernel-exploit ms16-032 cve-2016-0099"
   blurb: "A single open port, a file server that never got patched, and a kernel that never got patched either. Optimum is a lesson in how two missing Tuesdays become one full SYSTEM shell."
 
 - box: Shocker
@@ -101,6 +113,7 @@
   url: /2018/02/24/a-word-said-in-the-wrong-doorway.html
   date: 2018-02-24
   tags: "shellshock · cgi · sudo"
+  chain: "recon web-enum shellshock cve-2014-6271 rce sudo"
   blurb: "A four-year-old Bash bug, smuggled in through a header nobody reads, and a sudo rule that hands you root in one line."
 
 - box: Nibbles
@@ -108,6 +121,7 @@
   url: /2018/07/07/a-blog-named-after-its-own-bite.html
   date: 2018-07-07
   tags: "file-upload · sudo · weak-creds"
+  chain: "recon web-enum nibbleblog config-leak weak-creds cve-2015-6967 file-upload webshell sudo writable-path"
   blurb: "A guessed admin password and a sudo script anyone could edit turn an easy blog box into a clean lesson on trusting your own filesystem."
 
 - box: Beep
@@ -115,6 +129,7 @@
   url: /2017/06/03/a-box-that-answers-every-door.html
   date: 2017-06-03
   tags: "elastix · lfi · cred-reuse"
+  chain: "recon elastix lfi cve-2012-4869 config-leak cred-reuse webmin freepbx rce sudo shellshock"
   blurb: "An ancient Elastix PBX with a directory-traversal bug that bleeds a root password into half a dozen open services, and you only have to walk through one of them."
 
 - box: Devel
@@ -122,6 +137,7 @@
   url: /2017/10/21/the-loading-dock.html
   date: 2017-10-21
   tags: "anonymous-ftp · webshell · kernel"
+  chain: "recon anonymous-ftp file-upload webshell kernel-exploit ms11-046"
   blurb: "Anonymous FTP drops files straight into the live web root, so you upload a shell as a guest and the web server runs it. Then an unpatched kernel hands over SYSTEM."
 
 - box: LittleTommy
@@ -129,6 +145,7 @@
   url: /2017/12/10/still-has-the-key.html
   date: 2017-12-10
   tags: "reversing · pwn · use-after-free"
+  chain: "reversing use-after-free"
   blurb: "A tiny account-manager binary frees memory but keeps trusting the pointer, so you delete an account, move new data into its old slot, and the program reads it as the real thing. A use-after-free, start to finish."
 
 - box: Nest
@@ -136,6 +153,7 @@
   url: /2020/06/13/the-house-that-kept-its-keys-in-the-walls.html
   date: 2020-06-13
   tags: "smb-enumeration · reversing · ads"
+  chain: "recon smb-enum config-leak weak-creds cred-reuse source-review custom-crypto-decrypt ntfs-ads dnspy-debugging psexec"
   blurb: "A medium Windows box with no exploit at all — just a chain of secrets, each one decrypted to find the address of the next, all the way down to a binary you have to read."
 
 - box: Bastard
@@ -143,6 +161,7 @@
   url: /2017/09/23/the-form-that-built-itself.html
   date: 2017-09-23
   tags: "drupalgeddon2 · rce · kernel-exploit"
+  chain: "recon web-enum drupal cve-2018-7600 rce cve-2015-1701 kernel-exploit"
   blurb: "A Drupal form that trusts the names you give its fields, and a Windows kernel that never met a patch — two old doors, both wide open."
 
 - box: Grandpa
@@ -150,6 +169,7 @@
   url: /2017/11/28/a-web-server-that-forgot-to-grow-up.html
   date: 2017-11-28
   tags: "webdav · bufferoverflow · tokenkidnapping"
+  chain: "recon iis webdav cve-2017-7269 bof rce seimpersonate churrasco"
   blurb: "One open port, a fifteen-year-old web server, and a request header long enough to spill into kernel memory. Grandpa is a single CVE for the door and one stolen token for the crown."
 
 - box: Granny
@@ -157,6 +177,7 @@
   url: /2017/09/30/through-the-side-door.html
   date: 2017-09-30
   tags: "webdav · iis6 · token-impersonation"
+  chain: "recon iis webdav davtest file-upload webshell rce seimpersonate token-impersonation cve-2014-4113"
   blurb: "An IIS 6 WebDAV server refuses to accept an aspx shell, so you upload it as a text file and ask the server to rename it. Then a service account with one extra privilege hands you the whole machine."
 
 - box: Arctic
@@ -164,6 +185,7 @@
   url: /2020/05/26/the-server-that-read-its-own-password-aloud.html
   date: 2020-05-26
   tags: "coldfusion · directory-traversal · kernel-exploit"
+  chain: "recon coldfusion directory-traversal null-byte-injection config-leak hash-cracking scheduled-task-abuse webshell kernel-exploit ms10-059"
   blurb: "A null byte walks ColdFusion 8 back to its own password file, a scheduled task plants a shell, and an unpatched 2008 kernel does the rest."
 
 - box: Control
@@ -171,6 +193,7 @@
   url: /2020/05/02/who-gets-to-say-yes.html
   date: 2020-05-02
   tags: "sqli · winrm · registry-acl"
+  chain: "enumeration source-review header-fuzzing auth-bypass sqli webshell rce hash-cracking cred-reuse acl-abuse"
   blurb: "A spoofed proxy header opens the admin panel, a FILE-privileged database writes a webshell to the web root, and a user with write access to the Services registry key turns himself into SYSTEM."
 
 - box: Silo
@@ -178,6 +201,7 @@
   url: /2018/08/11/the-database-wore-a-crown.html
   date: 2018-08-11
   tags: "oracle · webshell · pass-the-hash"
+  chain: "recon oracle-tns sid-guessing default-creds odat webshell volatility pass-the-hash psexec"
   blurb: "Silo is an Oracle database running as SYSTEM that you log into with a 1977 default password, then make it write a shell into IIS for you. Root is a password and a hash, no exploit in sight."
 
 - box: Bounty
@@ -185,6 +209,7 @@
   url: /2018/11/03/the-rulebook-was-the-payload.html
   date: 2018-11-03
   tags: "web.config · asp-rce · seimpersonate"
+  chain: "recon web-enum file-upload rce seimpersonate juicy-potato"
   blurb: "Bounty blocks every script extension you can name, then lets you upload the rulebook that decides which extensions count, and a forgotten service privilege does the rest."
 
 - box: Chatterbox
@@ -192,6 +217,7 @@
   url: /2018/06/23/the-key-taped-under-the-keyboard.html
   date: 2018-06-23
   tags: "buffer-overflow · autologon · password-reuse"
+  chain: "recon achat bof cve-2015-1578 acl-abuse autologon config-leak cred-reuse"
   blurb: "A decade-old chat program overflows into a shell, then the registry hands you the autologon password in plain text, the same word the Administrator was using."
 
 - box: Arkham
@@ -199,6 +225,7 @@
   url: /2019/08/17/the-key-was-in-the-backup.html
   date: 2019-08-17
   tags: "deserialization · luks · uac-bypass"
+  chain: "enumeration config-leak deserialization-rce uac-bypass"
   blurb: "A backup disk image leaks the secret that signs the server's session state, and a forged ViewState turns that signature into a shell."
 
 - box: Heist
@@ -206,6 +233,7 @@
   url: /2019/12/07/the-router-config-was-the-vault.html
   date: 2019-12-07
   tags: "cisco-passwords · password-spray · memory-dump"
+  chain: "recon web-enum guest-access cisco-config-leak cisco-type7-decrypt hash-cracking password-spray lookupsid cred-reuse winrm process-dump firefox-memory procdump"
   blurb: "A leaked Cisco config, two password schemes that were never really encryption, and a browser that kept the admin's password in plain memory."
 
 - box: Reel
@@ -213,6 +241,7 @@
   url: /2018/11/17/the-invoice-you-open-yourself.html
   date: 2018-11-17
   tags: "phishing · rtf-exploit · acl-abuse"
+  chain: "enumeration ftp-anonymous phishing cve-2017-0199 applocker-bypass dpapi bloodhound acl-abuse writeowner config-leak"
   blurb: "Reel mails the box its own exploit. A readme asks for RTF files, so you send one that bites, then ride a chain of Active Directory permissions from a low clerk to Administrator."
 
 - box: Access
@@ -220,6 +249,7 @@
   url: /2019/03/02/the-key-was-already-on-the-keyring.html
   date: 2019-03-02
   tags: "ftp · dpapi · privesc"
+  chain: "enumeration anonymous-ftp cred-reuse pst-extraction telnet runas-savecred dpapi mimikatz"
   blurb: "Anonymous FTP leaks a backup, a chain of stale passwords leads to a telnet shell, and Windows coughs up the admin password it swore to protect."
 
 - box: Fighter
@@ -227,6 +257,7 @@
   url: /2018/10/13/the-driver-wore-a-games-name.html
   date: 2018-10-13
   tags: "sqli · applocker-bypass · kernel-driver"
+  chain: "recon vhost-fuzzing web-enum sqli rce xp-cmdshell filter-bypass applocker-bypass scheduled-task capcom-driver"
   blurb: "Fighter is a login form that runs your SQL, an allow-list you walk around instead of through, and a signed game-cheat driver that rents you the kernel."
 
 - box: Jerry
@@ -234,6 +265,7 @@
   url: /2018/11/24/two-for-the-price-of-one.html
   date: 2018-11-24
   tags: "tomcat · default-creds · war-deploy"
+  chain: "recon tomcat default-creds file-upload rce"
   blurb: "One open port, a manager login that still uses its factory password, and a war file that hands you SYSTEM in a single move."
 
 - box: Querier
@@ -241,6 +273,7 @@
   url: /2019/06/29/the-spreadsheet-remembered-the-password.html
   date: 2019-06-29
   tags: "macro-creds · ntlm-relay · gpp-cpassword"
+  chain: "recon smb-enum config-leak mssql xp_dirtree responder hash-cracking xp_cmdshell gpp-password service-abuse"
   blurb: "A macro-enabled spreadsheet leaks a database login, the database calls back to you and gives up its hash, and an old group policy file still holds the admin password in the open."
 
 - box: Reel2
@@ -248,6 +281,7 @@
   url: /2021/03/20/the-cage-that-read-its-own-name-backwards.html
   date: 2021-03-20
   tags: "password-spray · jea-breakout · path-traversal"
+  chain: "recon web-enum password-spray responder hash-cracking winrm jea-breakout leveldb path-traversal"
   blurb: "Reel2 is four small trusts in a row: a season guessed into a password, an email that mails you a hash, a cage you walk out of with one symbol, and a fence that only checks the front of the path."
 
 - box: Remote
@@ -255,6 +289,7 @@
   url: /2020/09/12/the-backup-that-talked.html
   date: 2020-09-12
   tags: "nfs · umbraco-rce · teamviewer"
+  chain: "enumeration nfs hash-cracking umbraco cve-2019-7214 rce teamviewer cred-reuse"
   blurb: "An open NFS backup leaks a CMS hash, an authenticated Umbraco bug runs your code, and TeamViewer hands over the admin password it encrypted with a key everyone already has."
 
 - box: SecNotes
@@ -262,6 +297,7 @@
   url: /2019/01/26/a-note-you-were-never-meant-to-read.html
   date: 2019-01-26
   tags: "sqli · smb · wsl"
+  chain: "recon web-enum second-order-sqli csrf cred-reuse smb writable-share file-upload webshell reverse-shell wsl bash-history psexec"
   blurb: "A notes app where your account name is a query, a file share that runs PHP, and an admin password left behind in a Linux shell living quietly inside Windows."
 
 - box: ServMon
@@ -269,6 +305,7 @@
   url: /2020/06/27/the-note-on-the-desk.html
   date: 2020-06-27
   tags: "traversal · ssh · nsclient"
+  chain: "recon anonymous-ftp nvms-1000 cve-2019-20085 directory-traversal config-leak nsclient++ port-forwarding scheduled-task-abuse"
   blurb: "ServMon is a box built entirely out of notes left lying around, and each one tells you exactly where the next door is."
 
 - box: conceal
@@ -276,6 +313,7 @@
   url: /2019/05/25/the-host-behind-the-curtain.html
   date: 2019-05-25
   tags: "ipsec · snmp · juicypotato"
+  chain: "snmp hash-cracking ike-scan ipsec web-enum anonymous-ftp file-upload webshell seimpersonate juicy-potato"
   blurb: "Conceal answers nothing on TCP until you build the VPN it told you the password to, then anonymous FTP drops a shell straight into the web root."
 
 - box: Bastion
@@ -283,6 +321,7 @@
   url: /2019/09/14/the-backup-that-forgot-to-lock-the-door.html
   date: 2019-09-14
   tags: "smb · vhd-mount · mremoteng"
+  chain: "recon smb-enum vhd-mount sam-dump hash-cracking mremoteng"
   blurb: "A guest-readable backup share holds an entire Windows disk image, and mounting it spills the SAM, then a password manager coughs up Administrator."
 
 - box: Buff
@@ -290,6 +329,7 @@
   url: /2020/11/28/the-gym-that-spotted-you.html
   date: 2020-11-28
   tags: "file-upload · tunneling · buffer-overflow"
+  chain: "recon web-enum gym-management-system file-upload webshell rce cloudme tunneling chisel bof"
   blurb: "A gym app takes a picture that is really code, then a cloud-sync tool that only listens to localhost gets reached through a tunnel and overflowed into Administrator."
 
 - box: Omni
@@ -297,6 +337,7 @@
   url: /2021/01/16/the-thing-that-forgot-to-lock-its-own-door.html
   date: 2021-01-16
   tags: "iot-core · sireprat · dpapi"
+  chain: "recon sirep rce secretsdump hash-cracking dpapi config-leak chisel"
   blurb: "Windows IoT Core ships a factory debug channel that runs any command as SYSTEM, and Omni turns that one forgotten port into a full takeover."
 
 - box: Worker
@@ -304,6 +345,7 @@
   url: /2021/02/06/what-the-repo-remembered.html
   date: 2021-02-06
   tags: "svn · azure-devops · ci-cd"
+  chain: "recon svn config-leak vhost-fuzzing cred-reuse azure-devops ci-cd-pipeline-abuse webshell seimpersonateprivilege rogue-potato tunneling"
   blurb: "A deleted password lives forever in SVN history, and a build pipeline that runs as SYSTEM will gladly compile your reverse shell."
 
 - box: Kotarak
@@ -311,6 +353,7 @@
   url: /2018/03/17/the-server-that-ran-your-errands.html
   date: 2018-03-17
   tags: "ssrf · tomcat · wget-ftp"
+  chain: "recon ssrf config-leak tomcat webshell secretsdump hash-cracking cred-reuse cve-2016-4971 disk-group"
   blurb: "A web page that fetches any URL you name becomes a phone in the building's lobby, and an outdated wget on a cron timer fetches the last door open."
 
 - box: Paper
@@ -318,6 +361,7 @@
   url: /2022/06/25/the-draft-that-talked.html
   date: 2022-06-25
   tags: "wordpress · path-traversal · polkit"
+  chain: "recon web-enum wordpress cve-2019-17671 path-traversal config-leak cred-reuse cve-2021-3560"
   blurb: "A WordPress draft nobody published spills a private chat URL, a customer-service bot traverses out of its own folder, and a race against polkit hands over root."
 
 - box: Bashed
@@ -325,6 +369,7 @@
   url: /2018/05/05/a-shell-someone-left-in-the-front-window.html
   date: 2018-05-05
   tags: "webshell · sudo · cron"
+  chain: "recon web-enum webshell sudo cron writable-path"
   blurb: "Bashed is a box you walk into through a tool the developer built to make their own life easier, then climb to root on a cron job that trusts whatever file it finds."
 
 - box: Brainfuck
@@ -332,6 +377,7 @@
   url: /2017/06/02/the-cipher-kept-the-key.html
   date: 2017-06-02
   tags: "wordpress · cryptanalysis · lxd"
+  chain: "recon vhost-enum wpscan wordpress auth-bypass config-leak imap vigenere-known-plaintext hash-cracking lxd"
   blurb: "A WordPress bypass leaks a mail password, a one-time pad reused too long leaks an SSH key URL, and the lxd group hands over the host. Four locks, every key hidden in the lock before it."
 
 - box: OpenAdmin
@@ -339,6 +385,7 @@
   url: /2020/05/09/the-password-wore-three-faces.html
   date: 2020-05-09
   tags: "rce · cred-reuse · gtfobins"
+  chain: "web-enum opennetadmin command-injection config-leak cred-reuse port-forwarding hash-cracking sudo"
   blurb: "An old network-admin panel runs your command, a reused database password unlocks a user, a hardcoded login leaks an encrypted SSH key, and sudo nano hands over root."
 
 - box: SwagShop
@@ -346,6 +393,7 @@
   url: /2019/10/05/the-storefront-with-no-lock-on-the-till.html
   date: 2019-10-05
   tags: "magento · sqli · sudo"
+  chain: "recon web-enum magento config-leak sqli cve-2015-1397 deserialization rce webshell sudo gtfobins"
   blurb: "A Magento shop where the Shoplift SQLi mints you an admin, a deserialization bug turns that admin into a shell, and sudo vi finishes the job as root."
 
 - box: Nineveh
@@ -353,6 +401,7 @@
   url: /2017/12/23/the-locked-city.html
   date: 2017-12-23
   tags: "phpliteadmin · port-knocking · cron-injection"
+  chain: "web-enum brute-force cve-2014-4864 rce lfi directory-traversal port-knocking cron cve-2014-0476"
   blurb: "A guessed password writes a shell into a SQLite file, a picture hides the keys, the door only opens if you knock in the right order, and a root janitor reads a filename as a command."
 
 - box: Cronos
@@ -360,6 +409,7 @@
   url: /2017/08/12/the-minute-hand-was-root.html
   date: 2017-08-12
   tags: "zone-transfer · command-injection · cron"
+  chain: "recon dns-zone-transfer sqli command-injection config-leak cron writable-path"
   blurb: "A DNS server that lists its own secrets, a login form that believes a lie, and a root cron job pointed at a file you can edit."
 
 - box: SolidState
@@ -367,6 +417,7 @@
   url: /2018/02/03/the-mailroom-master-key.html
   date: 2018-02-03
   tags: "james-rce · rbash-escape · cron-privesc"
+  chain: "recon apache-james default-creds rbash-escape pspy cron world-writable-file rce"
   blurb: "A mail server still wearing its factory password lets you reset every inbox, read an SSH password out of a welcome email, escape a toy shell, and ride a root cron job to the crown."
 
 - box: TartarSauce
@@ -374,6 +425,7 @@
   url: /2018/10/27/the-same-knife-twice.html
   date: 2018-10-27
   tags: "rfi · sudo-tar · privesc"
+  chain: "recon web-enum wordpress gwolle-guestbook rfi webshell sudo tar cron race-condition suid"
   blurb: "A guestbook plugin fetches and runs your file, then tar gets turned against the box twice in a row, once through a sudo rule and once through a root-owned backup robot that trusts whatever it unpacks."
 
 - box: Sunday
@@ -381,6 +433,7 @@
   url: /2018/10/06/the-day-the-fetch-boy-ran-the-house.html
   date: 2018-10-06
   tags: "finger-enum · weak-creds · sudo-wget"
+  chain: "enumeration finger-user-enum weak-creds hash-cracking wget-sudo"
   blurb: "An old Solaris box that talks too much, trusts a one-word password, and lets a download tool with root's blessing overwrite the very file root is told to run."
 
 - box: Poison
@@ -388,6 +441,7 @@
   url: /2018/09/15/thirteen-coats-of-paint.html
   date: 2018-09-15
   tags: "lfi · log-poisoning · ssh-tunnel"
+  chain: "recon web-enum lfi config-leak base64-decode log-poisoning rce cred-reuse port-forwarding vnc"
   blurb: "A form that loads any file you name, a password wrapped in thirteen layers of base64, and a root VNC session hiding behind localhost."
 
 - box: Quick
@@ -395,6 +449,7 @@
   url: /2020/09/05/the-door-that-only-spoke-a-newer-language.html
   date: 2020-09-05
   tags: "http3 · esi-injection · symlink-race"
+  chain: "recon http3-quic web-enum config-leak esi-injection xslt-injection rce race-condition cred-reuse"
   blurb: "Quick hides its front door behind a protocol your tools cannot speak, then loses the keys to an edge cache, a printer race, and a config file that never forgot a password."
 
 - box: Help
@@ -402,6 +457,7 @@
   url: /2019/06/15/the-help-desk-that-helped-itself-out.html
   date: 2019-06-15
   tags: "graphql · file-upload · kernel-exploit"
+  chain: "recon web-enum graphql config-leak hash-cracking helpdeskz file-upload webshell blind-sqli cred-reuse cve-2017-16995"
   blurb: "An API hands over a password to anyone who asks nicely, a help-desk app keeps the very files it claims to reject, and a year-old kernel hands out root for free."
 
 - box: Jarvis
@@ -409,6 +465,7 @@
   url: /2019/11/16/the-filter-that-forgot-a-door.html
   date: 2019-11-16
   tags: "sqli · command-injection · gtfobins"
+  chain: "recon sqli waf-bypass hash-cracking into-outfile webshell sudo command-injection suid systemctl"
   blurb: "A booking page that writes files, a blacklist with a hole in it, and a SUID systemctl that runs any service you hand it. Three locks, none of them held."
 
 - box: Networked
@@ -416,6 +473,7 @@
   url: /2019/11/23/a-picture-that-ran.html
   date: 2019-11-23
   tags: "file-upload · command-injection · ifcfg"
+  chain: "recon web-enum source-review file-upload webshell cron command-injection sudo config-injection"
   blurb: "A photo upload that runs as code, a filename that runs as a command, and a single space in a network config that runs as root."
 
 - box: Node
@@ -423,6 +481,7 @@
   url: /2018/03/10/the-api-that-talked-too-much.html
   date: 2018-03-10
   tags: "api-leak · creds · suid"
+  chain: "recon web-enum source-review hash-cracking auth-bypass config-leak cred-reuse suid wildcard-injection"
   blurb: "A REST API that returns every user's password hash, a backup zip that leaks the database, and a root-owned SUID binary that trusts the shell to expand its own path."
 
 - box: Safe
@@ -430,6 +489,7 @@
   url: /2019/11/02/the-vault-with-a-sticky-note-inside.html
   date: 2019-11-02
   tags: "bufferoverflow · rop · keepass"
+  chain: "recon bof rop keepass hash-cracking privilege-escalation"
   blurb: "A custom binary that trusts your input too far gives a shell, and a KeePass vault keyed to a single vacation photo gives root."
 
 - box: Scavenger
@@ -437,6 +497,7 @@
   url: /2020/03/07/someone-was-here-first.html
   date: 2020-03-07
   tags: "sql-injection · zone-transfer · rootkit-re"
+  chain: "recon sqli dns-zone-transfer web-enum webshell param-fuzzing config-leak pcap-analysis cred-reuse reversing"
   blurb: "A whois server with a SQL bug hands you a map of hacked sites, one of which a previous attacker already backdoored, and the rootkit they left becomes your road to root."
 
 - box: Traceback
@@ -444,6 +505,7 @@
   url: /2020/08/22/the-backdoor-left-the-door-open.html
   date: 2020-08-22
   tags: "webshell · gtfobins · motd"
+  chain: "recon web-enum webshell default-creds reverse-shell ssh-key-reuse sudo gtfobins cron"
   blurb: "Someone defaced Traceback and left their webshell behind. You walk in through it, ride a sudo Lua interpreter to a second user, then poison the login banner to become root."
 
 - box: LaCasaDePapel
@@ -451,6 +513,7 @@
   url: /2019/08/03/the-heist-needs-its-own-key.html
   date: 2019-08-03
   tags: "vsftpd-backdoor · client-cert · path-traversal"
+  chain: "recon cve-2011-2523 client-cert-forgery path-traversal supervisord writable-path"
   blurb: "A 2011 FTP backdoor drops you into a caged PHP console, the box hands you the very key that signs your own entry badge, and a root job left in a writable office walks you the rest of the way in."
 
 - box: Aragog
@@ -458,6 +521,7 @@
   url: /2018/07/28/the-spider-reads-your-mail.html
   date: 2018-07-28
   tags: "xxe · wordpress · cron"
+  chain: "enumeration web-enum xxe pspy cron writable-path cred-reuse"
   blurb: "An XML parser that fetches any file you name leaks an SSH key, then a root cron that endlessly restores a world-writable WordPress hands you the admin's password on a timer."
 
 - box: BigHead
@@ -465,6 +529,7 @@
   url: /2019/05/11/the-web-server-that-was-homemade.html
   date: 2019-05-11
   tags: "bufferoverflow · vhosts · ads"
+  chain: "vhost-fuzzing web-enum source-review hash-cracking reversing bof egg-hunter config-leak port-forwarding lfi alternate-data-stream"
   blurb: "A custom web server with its source on GitHub eats a stack overflow through an egg hunter, then the root flag turns out to be a KeePass database hidden in an alternate data stream."
 
 - box: Blocky
@@ -472,6 +537,7 @@
   url: /2017/12/16/the-password-inside-the-jar.html
   date: 2017-12-16
   tags: "decompile · password-reuse · sudo"
+  chain: "recon web-enum directory-listing wordpress reversing cred-reuse sudo"
   blurb: "A Minecraft server leaks its own database password inside a plugin jar, and the same word unlocks the admin's SSH and then root."
 
 - box: Celestial
@@ -479,6 +545,7 @@
   url: /2018/09/01/the-cookie-that-came-back-to-life.html
   date: 2018-09-01
   tags: "deserialization · nodejs · cron"
+  chain: "recon insecure-deserialization rce pspy cron writable-path"
   blurb: "A Node.js app trusts a cookie enough to run it, and a root cron job trusts a file enough to execute it. Two acts of misplaced faith and you walk to root."
 
 - box: Fuse
@@ -486,6 +553,7 @@
   url: /2020/11/07/everything-leaves-a-receipt.html
   date: 2020-11-07
   tags: "print-logs · password-reset · seloaddriver"
+  chain: "web-enum config-leak password-spray smbpasswd-reset rpc winrm seloaddriverprivilege capcom-sys"
   blurb: "A print-job log names every employee and leaks a password, an expired credential is reset to a working one, a service password hides in a printer comment, and SeLoadDriverPrivilege turns loading a driver into being the kernel."
 
 - box: Absolute
@@ -493,6 +561,7 @@
   url: /2023/06/03/the-names-in-the-photographs.html
   date: 2023-06-03
   tags: "kerberos · asreproast · krbrelay"
+  chain: "recon exif-metadata kerbrute as-rep-roast hash-cracking config-leak bloodhound acl-abuse shadow-credentials kerberos-relay dcsync"
   blurb: "Absolute turns a stock-photo homepage into a roster of real names, then forces you to attack a domain that refuses every NTLM handshake and only speaks Kerberos."
 
 - box: Active
@@ -500,6 +569,7 @@
   url: /2018/12/15/the-password-in-the-filing-cabinet.html
   date: 2018-12-15
   tags: "smb-enum · gpp-cpassword · kerberoast"
+  chain: "recon smb-enum null-session gpp-password cve-2014-1812 kerberoasting psexec"
   blurb: "A domain controller leaks a service password from an old group policy file, then lets a low user roast the Administrator's ticket straight out of Kerberos."
 
 - box: Acute
@@ -507,6 +577,7 @@
   url: /2022/07/23/the-word-document-knew-everyones-name.html
   date: 2022-07-23
   tags: "pswa · credential-reuse · scheduled-task"
+  chain: "recon metadata-extraction password-spray powershell-web-access jea-breakout dpapi scheduled-task-abuse cred-reuse hash-cracking"
   blurb: "A single HTTPS port, a leaky onboarding doc, and a five-minute scheduled task that runs whatever anyone drops in a folder. Acute is a relay race where every baton is a stolen identity."
 
 - box: Admirer
@@ -514,6 +585,7 @@
   url: /2020/10/03/the-database-that-came-to-you.html
   date: 2020-10-03
   tags: "adminer · file-read · pythonpath"
+  chain: "recon web-enum config-leak source-review cred-reuse adminer load-data-local-infile sudo setenv python-library-hijack"
   blurb: "A database login form you connect to your own server, which then quietly hands you the box's source code, followed by one environment variable that turns a backup script into root."
 
 - box: APT
@@ -521,6 +593,7 @@
   url: /2021/04/17/the-address-written-in-memory.html
   date: 2021-04-17
   tags: "ipv6 · pass-the-hash · netntlmv1"
+  chain: "ioxidresolver ipv6-enumeration smb-enum hash-cracking kerbrute-userenum config-leak netntlmv1-downgrade responder pass-the-hash"
   blurb: "An Insane Windows DC that shows you only two ports, then leaks its real address, its old backups, and a machine account that still answers in DES."
 
 - box: Armageddon
@@ -528,6 +601,7 @@
   url: /2021/07/31/a-word-the-server-already-knew.html
   date: 2021-07-31
   tags: "drupalgeddon · hash-reuse · snap-privesc"
+  chain: "web-enum drupal cve-2018-7600 rce webshell config-leak hash-cracking cred-reuse sudo snap"
   blurb: "A four-year-old Drupal bug hands you a shell on the forgot-password page, a cracked admin hash gets reused for SSH, and a single permissive sudo rule lets you install your own root."
 
 - box: Artificial
@@ -535,6 +609,7 @@
   url: /2025/11/01/the-model-was-the-payload.html
   date: 2025-11-01
   tags: "deserialization · password-cracking · privesc"
+  chain: "recon web-enum file-upload insecure-deserialization keras-lambda-rce config-leak hash-cracking cred-reuse port-forwarding service-abuse"
   blurb: "A saved AI model is just code in a trenchcoat, and Artificial loads it without asking what is inside, then hands you root through a backup tool that never learned to say no."
 
 - box: Atom
@@ -542,6 +617,7 @@
   url: /2021/07/17/the-update-that-updated-you.html
   date: 2021-07-17
   tags: "electron-updater · smb · redis"
+  chain: "recon smb-enum writable-path source-review electron-updater command-injection rce config-leak"
   blurb: "A note-taking app phones home for updates to a share that anyone can write to, and one apostrophe in a filename turns its security check into a yes."
 
 - box: Blunder
@@ -549,6 +625,7 @@
   url: /2020/10/24/the-blog-that-kept-a-diary.html
   date: 2020-10-24
   tags: "cms · password-reuse · sudo"
+  chain: "web-enum bludit auth-bypass brute-force file-upload rce hash-cracking cred-reuse cve-2019-14287"
   blurb: "A blog confesses its own user in a to-do file, a spoofed header sidesteps the login lockout, and a forgotten old copy of the CMS hands over the password that walks straight to root through one missing minus sign."
 
 - box: BreadCrumbs
@@ -556,6 +633,7 @@
   url: /2021/07/24/follow-the-crumbs.html
   date: 2021-07-24
   tags: "lfi · cookie-forgery · sqli"
+  chain: "enumeration directory-traversal source-review jwt file-upload webshell av-evasion cred-reuse sticky-notes port-forwarding sqli"
   blurb: "A hard Windows box that hands you nothing whole. You read its source code through a traversal bug, forge its cookies from leaked math, and chase a trail of reused secrets all the way to a database that coughs up the admin password."
 
 - box: BroScience
@@ -563,6 +641,7 @@
   url: /2023/04/15/the-gym-forgot-to-lock-its-files.html
   date: 2023-04-15
   tags: "lfi · deserialization · command-injection"
+  chain: "recon lfi double-url-encoding source-review insecure-randomness insecure-deserialization webshell hash-cracking cred-reuse cron command-injection"
   blurb: "A fitness site that reads any file you name, trusts a clock to keep its secrets, and unwraps your cookie straight into running code."
 
 - box: Cascade
@@ -570,6 +649,7 @@
   url: /2020/08/01/the-password-that-refused-to-die.html
   date: 2020-08-01
   tags: "ldap · vnc-crypto · ad-recycle-bin"
+  chain: "recon ldap anonymous-ldap-bind smb-enum tightvnc-password-decrypt cred-reuse evil-winrm reversing hardcoded-key ad-recycle-bin"
   blurb: "A medium Windows box that is really a four-link credential chain, ending with an admin password recovered from a deleted account in the AD Recycle Bin."
 
 - box: Delivery
@@ -577,6 +657,7 @@
   url: /2021/05/29/a-mailbox-of-your-own.html
   date: 2021-05-29
   tags: "osticket · mattermost · password-reuse"
+  chain: "enumeration osticket mattermost auth-bypass config-leak hash-cracking cred-reuse"
   blurb: "A help desk gives every stranger a working company mailbox, and a chat server trusts that mailbox enough to let you read the staff room. The rest is one password worn in a few different costumes."
 
 - box: DevOops
@@ -584,6 +665,7 @@
   url: /2018/10/20/the-key-was-never-deleted.html
   date: 2018-10-20
   tags: "xxe · pickle · git-history"
+  chain: "UNVERIFIABLE: source write-up not found"
   blurb: "An XML upload form reads a stranger any file on disk, then the box hands you root because a deleted secret was never actually deleted, only hidden one commit back in git."
 
 - box: Doctor
@@ -591,6 +673,7 @@
   url: /2021/02/13/the-intake-form-ran-your-code.html
   date: 2021-02-13
   tags: "ssti · log-leak · splunk"
+  chain: "recon web-enum ssti command-injection cred-reuse splunk"
   blurb: "A healthcare message board renders your post title as a live template, a forgotten Apache log keeps a password in plain sight, and a root-run Splunk happily installs the app you send it."
 
 - box: Ellingson
@@ -598,6 +681,7 @@
   url: /2019/10/26/the-most-common-password-is-a-confession.html
   date: 2019-10-26
   tags: "werkzeug · ret2libc · password-cracking"
+  chain: "recon werkzeug-debug-console rce hash-cracking suid bof ret2libc aslr-bypass"
   blurb: "A production debugger writes your SSH key, a forgotten shadow backup leaks the hashes, and a SUID binary falls to a hand-built ret2libc that leaks its way past ASLR."
 
 - box: Encoding
@@ -605,6 +689,7 @@
   url: /2023/04/22/the-envelope-that-fetched-itself.html
   date: 2023-04-22
   tags: "ssrf · php-filter-chain · sudo-wildcard"
+  chain: "recon vhost-fuzzing web-enum ssrf file-scheme-ssrf lfi git-dump source-review parse-url-bypass php-filter-chain rce sudo git-hook-abuse ssh-key systemd-abuse sudo-wildcard"
   blurb: "A file-fetching API that will read anything you name, a leaked git repo, and a privilege chain built entirely out of small trusts nobody locked."
 
 - box: Enterprise
@@ -612,6 +697,7 @@
   url: /2018/03/24/a-bridge-too-far-forward.html
   date: 2018-03-24
   tags: "sqli · container-escape · ret2libc"
+  chain: "recon web-enum wordpress joomla sqli cred-reuse webshell container-escape suid bof ret2libc"
   blurb: "A Star Trek box that leaks its own passwords through a custom WordPress plugin, lets you walk container to container on reused creds, and finishes with a textbook buffer overflow on a SUID bridge console."
 
 - box: Extension
@@ -619,6 +705,7 @@
   url: /2023/03/25/the-length-of-the-lie.html
   date: 2023-03-25
   tags: "hash-extension · stored-xss · docker-socket"
+  chain: "recon vhost-fuzzing auth-bypass hash-cracking cred-reuse idor xss ssh-key-reuse hash-length-extension command-injection container-escape"
   blurb: "Extension is a five-link chain where every link is somebody trusting input they never measured, ending in a hash you can grow past its own seal and a docker socket that hands over the host."
 
 - box: Flight
@@ -626,6 +713,7 @@
   url: /2023/05/13/the-server-that-phoned-home.html
   date: 2023-05-13
   tags: "ntlm-relay · password-spray · dcsync"
+  chain: "vhost-fuzzing lfi responder hash-cracking password-spray webshell dcsync pass-the-hash"
   blurb: "Flight is a domain controller that keeps introducing itself to your machine over SMB, and each introduction is a credential you didn't have a second ago."
 
 - box: Forge
@@ -633,6 +721,7 @@
   url: /2022/01/29/the-errand-boy-who-trusted-his-own-address.html
   date: 2022-01-29
   tags: "ssrf · ftp-smuggling · pdb"
+  chain: "recon vhost-fuzzing ssrf open-redirect config-leak sudo pdb-post-mortem rce"
   blurb: "Forge is a server that runs your errands. Teach it to walk back to its own front door and it fetches the user's SSH key, and a debugger left wired to a crash hands you root."
 
 - box: Forgot
@@ -640,6 +729,7 @@
   url: /2023/03/11/the-letter-you-mailed-yourself.html
   date: 2023-03-11
   tags: "host-header · cache-deception · python-eval"
+  chain: "enumeration host-header-injection account-takeover web-cache-deception sudo cve-2022-29216 tensorflow rce suid"
   blurb: "A reset link mailed to the wrong house, a cache that serves the admin's session to a stranger, and a security model that evaluates the very thing it was built to catch."
 
 - box: Frolic
@@ -647,6 +737,7 @@
   url: /2019/03/30/the-long-way-to-a-short-word.html
   date: 2019-03-30
   tags: "enumeration · rce · ret2libc"
+  chain: "recon web-enum playsms ssti rce webshell suid bof ret2libc"
   blurb: "A puzzle box that makes you decode your way to a login, then ends on a clean ret2libc that turns a four-line C program into root."
 
 - box: Haircut
@@ -654,6 +745,7 @@
   url: /2017/10/07/the-errand-boy-carried-a-knife.html
   date: 2017-10-07
   tags: "command injection · suid · privesc"
+  chain: "recon web-enum command-injection webshell rce suid screen cve-2017-5618 ld-preload"
   blurb: "A web page that fetches URLs on your behalf gets talked into fetching a backdoor, and a SUID screen binary writes a root shell into existence."
 
 - box: Hawk
@@ -661,6 +753,7 @@
   url: /2018/12/07/the-word-was-friends.html
   date: 2018-12-07
   tags: "drupal · openssl · h2-rce"
+  chain: "recon ftp-anonymous openssl-decryption drupal webshell rce config-leak cred-reuse port-forwarding"
   blurb: "A free FTP download decrypts to a Drupal admin password, a content module runs your PHP, and a root-owned H2 database alias hands you the crown."
 
 - box: Haystack
@@ -668,6 +761,7 @@
   url: /2019/11/09/the-needle-spoke-spanish.html
   date: 2019-11-09
   tags: "elasticsearch · kibana-lfi · logstash-rce"
+  chain: "recon base64 elasticsearch config-leak port-forwarding kibana cve-2018-17246 logstash writable-path"
   blurb: "A photo hides a hint, a search engine leaks the password, and a single line of Spanish in the right file gets executed as root."
 
 - box: Horizontall
@@ -675,6 +769,7 @@
   url: /2022/02/12/the-reset-code-was-empty.html
   date: 2022-02-12
   tags: "strapi · command-injection · deserialization"
+  chain: "web-enum config-leak strapi cve-2019-18818 auth-bypass cve-2019-19609 command-injection port-forwarding laravel cve-2021-3129 insecure-deserialization"
   blurb: "An empty reset code resets the admin's password, a plugin installer runs your shell, and a debug page left on in production poisons its own log into a root deserialization chain."
 
 - box: Intelligence
@@ -682,6 +777,7 @@
   url: /2021/12/04/the-filename-was-the-map.html
   date: 2021-12-04
   tags: "osint · ntlm-relay · delegation"
+  chain: "web-enum config-leak password-spray dns-record-injection responder hash-cracking bloodhound gmsa-abuse constrained-delegation"
   blurb: "A predictable filename leaks a hundred documents, one of them hands out the default password, and a service account nobody guarded walks you to Administrator."
 
 - box: Investigation
@@ -689,6 +785,7 @@
   url: /2023/04/29/the-filename-was-the-command.html
   date: 2023-04-29
   tags: "command-injection · log-forensics · sudo-fetch-exec"
+  chain: "recon web-enum file-upload exiftool cve-2022-23935 command-injection rce log-leak sudo"
   blurb: "A forensics shop runs ExifTool on your upload and never checks the filename, so the filename becomes the command, and the climb to root is one typo and one trusting download away."
 
 - box: Irked
@@ -696,6 +793,7 @@
   url: /2019/05/04/the-backdoor-someone-else-left.html
   date: 2019-05-04
   tags: "ircd · steganography · suid"
+  chain: "enumeration cve-2010-2075 unrealircd rce steganography steghide cred-reuse suid writable-path"
   blurb: "A chat server shipped with a stranger's backdoor sewn into its source, and a root binary trusts a script that does not exist yet."
 
 - box: Jeeves
@@ -703,6 +801,7 @@
   url: /2018/05/26/the-butler-kept-a-hidden-drawer.html
   date: 2018-05-26
   tags: "jenkins · pass-the-hash · ads"
+  chain: "web-enum jenkins rce keepass hash-cracking pass-the-hash ntfs-ads"
   blurb: "An unauthenticated Jenkins console, a KeePass database cracked with rockyou, a hash that logs in without ever becoming a password, and a final flag tucked into an NTFS alternate data stream."
 
 - box: Knife
@@ -710,6 +809,7 @@
   url: /2021/09/04/the-typo-that-shipped-a-backdoor.html
   date: 2021-09-04
   tags: "php-backdoor · header-injection · sudo-gtfobins"
+  chain: "web-enum php-8.1.0-dev-backdoor rce sudo knife"
   blurb: "A real-world poisoned PHP build runs your code from a misspelled header, and a sudo-blessed kitchen tool carves a path straight to root."
 
 - box: Love
@@ -717,6 +817,7 @@
   url: /2021/08/14/the-server-that-vouched-for-you.html
   date: 2021-08-14
   tags: "ssrf · file-upload · privesc"
+  chain: "recon ssrf voting-system file-upload webshell rce always-install-elevated"
   blurb: "A locked page, a scanner that fetches it for you, and a Windows installer setting that runs as SYSTEM by design."
 
 - box: Luanne
@@ -724,6 +825,7 @@
   url: /2021/04/03/the-weather-took-a-command.html
   date: 2021-04-03
   tags: "command-injection · creds-reuse · doas"
+  chain: "recon supervisor default-creds web-enum code-injection config-leak hash-cracking cred-reuse doas"
   blurb: "A Lua weather API treats the city name as code, and the whole box unzips from there."
 
 - box: Mango
@@ -731,6 +833,7 @@
   url: /2020/04/25/the-question-that-could-not-say-no.html
   date: 2020-04-25
   tags: "nosqli · regex-exfil · suid-jjs"
+  chain: "recon vhost-fuzzing nosqli auth-bypass cred-reuse suid"
   blurb: "A NoSQL login form gets asked the wrong question, leaks both passwords one letter at a time, and a forgotten SUID Java shell hands over root."
 
 - box: Mentor
@@ -738,6 +841,7 @@
   url: /2023/03/18/the-machine-that-talked-too-much.html
   date: 2023-03-18
   tags: "snmp · command-injection · password-reuse"
+  chain: "recon vhost-fuzzing snmp config-leak jwt command-injection tunneling default-creds hash-cracking sudo"
   blurb: "A monitoring service that answers a second name reads a password straight off a running process, and a backup endpoint runs whatever path you hand it."
 
 - box: Meta
@@ -745,6 +849,7 @@
   url: /2022/06/18/the-picture-was-the-payload.html
   date: 2022-06-18
   tags: "exiftool · imagemagick · privesc"
+  chain: "recon vhost-fuzzing file-upload cve-2021-22204 pspy cve-2020-29599 sudo env-injection"
   blurb: "Meta is three parsers in a row that read the caption on a picture and ran it. Exiftool to a shell, an ImageMagick cron to a user, a sudo'd neofetch config to root."
 
 - box: Mirai
@@ -752,6 +857,7 @@
   url: /2018/02/17/the-password-was-printed-on-the-box.html
   date: 2018-02-17
   tags: "default-creds · sudo · file-recovery"
+  chain: "recon web-enum default-creds sudo file-recovery extundelete"
   blurb: "Mirai is a Raspberry Pi that never changed its factory password, the same hole a famous botnet drove a truck through, and the only puzzle worth the name is forensic recovery of a flag someone deleted."
 
 - box: Monteverde
@@ -759,6 +865,7 @@
   url: /2020/06/20/the-name-was-the-password.html
   date: 2020-06-20
   tags: "password-spray · winrm · azure-ad-connect"
+  chain: "enumeration rpc password-spray winrm config-leak azure-ad-connect adsync-decrypt"
   blurb: "A batch account named after its own password, an XML file left in a share, and a cloud sync service that keeps the domain admin's credential in a drawer it can be talked into opening."
 
 - box: Netmon
@@ -766,6 +873,7 @@
   url: /2019/07/06/the-year-on-the-lock.html
   date: 2019-07-06
   tags: "ftp · prtg · command-injection"
+  chain: "recon anonymous-ftp config-leak weak-creds prtg cve-2018-9276 psexec"
   blurb: "Anonymous FTP gives you the entire C: drive, a stale backup leaks a 2018 password, and changing one digit lets you walk into a monitoring tool that runs commands as SYSTEM."
 
 - box: Olympus
@@ -773,6 +881,7 @@
   url: /2018/09/29/twelve-labors-for-a-shell.html
   date: 2018-09-29
   tags: "xdebug · pivoting · docker-group"
+  chain: "recon xdebug rce dns-zone-transfer hash-cracking cred-reuse port-knocking docker-group-privesc"
   blurb: "A debug port wired to the open internet kicks off a relay race through three containers, a cracked wifi handshake, and a docker group that quietly owns the whole machine."
 
 - box: Ophiuchi
@@ -780,6 +889,7 @@
   url: /2021/07/10/the-snake-that-reads-your-mind.html
   date: 2021-07-10
   tags: "deserialization · password-reuse · wasm"
+  chain: "recon snakeyaml insecure-deserialization rce config-leak cred-reuse sudo path-hijack wasm"
   blurb: "A YAML parser that doesn't just read text but builds the objects you describe, a Tomcat password reused on a real account, and a root deploy gated by one number inside a WebAssembly module you get to write."
 
 - box: Pandora
@@ -787,6 +897,7 @@
   url: /2022/05/28/the-box-that-leaked-its-own-keys.html
   date: 2022-05-28
   tags: "snmp · sqli · path-hijack"
+  chain: "snmp cred-reuse port-forwarding pandora-fms sqli cve-2021-32099 file-upload webshell suid path-hijack"
   blurb: "An over-sharing SNMP port hands you a password, a vulnerable Pandora FMS console forges its own admin session, and a SUID backup tool that trusts a bare word called tar finishes the climb to root."
 
 - box: Passage
@@ -794,6 +905,7 @@
   url: /2021/03/13/the-news-that-read-you-back.html
   date: 2021-03-13
   tags: "cutenews · keyreuse · dbus"
+  chain: "enumeration cutenews cve-2019-11447 file-upload webshell rce hash-cracking cred-reuse ssh-key-reuse cve-2019-7304"
   blurb: "A profile picture that runs as PHP, a CMS that files everyone's hashes by the front of their name, one SSH key shared between two accounts, and a desktop helper that writes anywhere as root without a password."
 
 - box: Pikaboo
@@ -801,6 +913,7 @@
   url: /2021/12/11/the-slash-that-wasnt-there.html
   date: 2021-12-11
   tags: "off-by-slash · log-poisoning · perl-injection"
+  chain: "enumeration auth-bypass path-traversal lfi log-poisoning webshell rce cron config-leak ldap command-injection"
   blurb: "A single missing slash slips you past the front desk, FTP logs hand you a shell, and a Perl script reads a filename as a command to give up root."
 
 - box: Pit
@@ -808,6 +921,7 @@
   url: /2021/10/02/the-box-that-talked-too-much.html
   date: 2021-10-02
   tags: "snmp · file-upload · selinux"
+  chain: "snmp config-leak seeddms cve-2019-12744 file-upload webshell cred-reuse acl-abuse"
   blurb: "A talkative SNMP daemon leaks a hidden web app, an upload form runs your code, and the same daemon hands you root because it executes scripts on command."
 
 - box: PivotAPI
@@ -815,6 +929,7 @@
   url: /2021/11/13/the-long-confession.html
   date: 2021-11-13
   tags: "asreproast · reversing · laps"
+  chain: "anonymous-ftp as-rep-roast hash-cracking reversing cred-reuse mssqlproxy keepass bloodhound acl-abuse laps"
   blurb: "An insane Windows box that is one long confession, every layer handing up the secret it was told to hide, from a name in a PDF to the LAPS password for administrador."
 
 - box: Popcorn
@@ -822,6 +937,7 @@
   url: /2017/06/02/the-poster-was-a-payload.html
   date: 2017-06-02
   tags: "file-upload · webshell · privesc"
+  chain: "recon web-enum config-leak torrent-hoster file-upload content-type-bypass webshell path-disclosure rce cve-2010-0832 dirtycow"
   blurb: "A torrent host that trusts the label on a file, and a login routine that follows a symlink straight into /etc/passwd."
 
 - box: Postman
@@ -829,6 +945,7 @@
   url: /2020/03/21/the-mail-slot-that-wrote-your-key.html
   date: 2020-03-21
   tags: "redis · credential-reuse · webmin"
+  chain: "recon redis hash-cracking su cred-reuse webmin cve-2019-12840 command-injection"
   blurb: "An open Redis writes your SSH key to disk, a cracked password walks you to the user it was locking out, and a Webmin panel hands you root one pipe at a time."
 
 - box: Precious
@@ -836,6 +953,7 @@
   url: /2023/05/27/the-errand-in-backticks.html
   date: 2023-05-27
   tags: "command-injection · credential-reuse · deserialization"
+  chain: "enumeration pdfkit cve-2022-25765 command-injection rce config-leak cred-reuse sudo insecure-deserialization suid"
   blurb: "A PDF generator pastes your URL into a shell, so you hand it a backtick and an errand. Then a config-file password and an unsafe YAML loader walk you the rest of the way to root."
 
 - box: Previse
@@ -843,6 +961,7 @@
   url: /2022/01/15/the-page-that-forgot-to-stop.html
   date: 2022-01-15
   tags: "ear · command-injection · path-hijack"
+  chain: "recon web-enum execute-after-redirect source-review config-leak os-command-injection hash-cracking sudo path-hijack"
   blurb: "A login check that sends you away but renders the page anyway, a leaked source zip, and a sudo script that trusts whatever gzip it finds first."
 
 - box: Ready
@@ -850,6 +969,7 @@
   url: /2021/05/22/the-box-inside-the-box.html
   date: 2021-05-22
   tags: "gitlab-ssrf · password-reuse · container-escape"
+  chain: "web-enum gitlab cve-2018-19571 ssrf cve-2018-19585 crlf-injection redis rce cred-reuse config-leak container-escape"
   blurb: "An outdated GitLab talks its own Redis into running your code, a backup file hands back the root password, and a privileged container turns out to be a wall with a door cut in it."
 
 - box: Scrambled
@@ -857,6 +977,7 @@
   url: /2022/10/08/the-ticket-was-always-yours.html
   date: 2022-10-08
   tags: "kerberos · silver-ticket · deserialization"
+  chain: "recon web-enum default-creds smb-enum kerberoasting hash-cracking silver-ticket source-review auth-bypass insecure-deserialization"
   blurb: "Scrambled disables NTLM to dodge relay attacks, and every step of the box flows down the Kerberos pipe it opened instead."
 
 - box: ScriptKiddie
@@ -864,6 +985,7 @@
   url: /2021/06/12/the-hacker-who-got-hacked.html
   date: 2021-06-12
   tags: "command-injection · sudo · privesc"
+  chain: "recon msfvenom cve-2020-7384 command-injection source-review log-poisoning sudo msfconsole"
   blurb: "A wannabe hacker built a web panel to run his tools for him, and every one of those tools became the door we walked through."
 
 - box: Search
@@ -871,6 +993,7 @@
   url: /2022/05/07/a-secret-read-aloud-down-a-hallway.html
   date: 2022-05-07
   tags: "kerberoast · gmsa · pswa"
+  chain: "recon web-enum ldap kerberoasting hash-cracking password-spray cred-reuse bloodhound gmsa-readpassword acl-abuse"
   blurb: "A password hidden in a website photo starts a long walk through Active Directory, where every account you reach is holding the key to the next one."
 
 - box: Sekhmet
@@ -878,6 +1001,7 @@
   url: /2023/04/08/the-lioness-keeps-her-cache.html
   date: 2023-04-08
   tags: "deserialization · known-plaintext · dpapi"
+  chain: "vhost-fuzzing insecure-deserialization waf-bypass known-plaintext hash-cracking ksu ldap-injection ntlm-capture password-spray applocker-bypass dpapi"
   blurb: "An Express cookie that runs your code, a backup zip cracked by what was already inside it, and a phone field that turns into a shell, all stacked into one of the longest roads to Domain Admin the platform ever paved."
 
 - box: Sense
@@ -885,6 +1009,7 @@
   url: /2018/03/31/the-firewall-that-trusted-a-pipe.html
   date: 2018-03-31
   tags: "enumeration · default-creds · command-injection"
+  chain: "recon web-enum config-leak default-creds pfsense cve-2014-4688 command-injection"
   blurb: "A pfSense firewall leaks its own login in a forgotten text file, then runs whatever you pipe into a graph URL, as root."
 
 - box: Seventeen
@@ -892,6 +1017,7 @@
   url: /2022/10/01/the-registry-pointed-the-wrong-way.html
   date: 2022-10-01
   tags: "sqli · lfi · supply-chain"
+  chain: "vhost-fuzzing blind-sqli cve-2020-12725 webshell lfi cve-2020-12640 config-leak cred-reuse sudo npm supply-chain"
   blurb: "A blind exam form bleeds a database, a forgotten installer runs your uploaded shell, and a registry pointed the wrong way installs your code as root."
 
 - box: Shibboleth
@@ -899,6 +1025,7 @@
   url: /2022/04/09/the-word-that-opened-every-door.html
   date: 2022-04-09
   tags: "ipmi · zabbix · mariadb"
+  chain: "file-not-found"
   blurb: "A management chip hands out an admin hash before you authenticate, and one cracked word unlocks Zabbix, a second user, and finally a database daemon running as root."
 
 - box: Sizzle
@@ -906,6 +1033,7 @@
   url: /2019/06/08/a-bait-file-and-a-borrowed-crown.html
   date: 2019-06-08
   tags: "responder · kerberoast · dcsync"
+  chain: "recon smb-enum scf-file-attack responder hash-cracking adcs winrm kerberoasting bloodhound dcsync pass-the-hash"
   blurb: "Sizzle is a full Active Directory tour: a poisoned shortcut leaks a hash, a certificate authority forges your identity, and a service account quietly holds the keys to replicate every secret in the domain."
 
 - box: SneakyMailer
@@ -913,6 +1041,7 @@
   url: /2020/12/05/the-phish-you-sent-yourself.html
   date: 2020-12-05
   tags: "phishing · imap · pip"
+  chain: "recon vhost-fuzzing web-enum phishing imap ftp file-upload webshell hash-cracking pypi-package-upload sudo"
   blurb: "A medium Linux box where the attacker becomes the scammer: send the staff a phishing link, harvest the credential they post back, and follow a password-reset email and a sudo pip rule to root."
 
 - box: Soccer
@@ -920,6 +1049,7 @@
   url: /2023/06/17/the-ticket-that-talked-back.html
   date: 2023-06-17
   tags: "default-creds · blind-sqli · doas"
+  chain: "recon web-enum tiny-file-manager default-creds file-upload webshell blind-sqli cred-reuse doas library-hijack"
   blurb: "A factory password, a ticket validator that answers true or false, and a stats tool that loads any Python it finds. Three doors nobody bothered to lock."
 
 - box: Stocker
@@ -927,6 +1057,7 @@
   url: /2023/07/01/the-cart-that-read-the-filesystem.html
   date: 2023-07-01
   tags: "nosql-injection · ssrf · sudo-wildcard"
+  chain: "recon vhost-fuzzing nosqli auth-bypass ssrf path-traversal config-leak cred-reuse sudo suid"
   blurb: "A login bypass made of pure logic, a checkout receipt that leaks the app's own source, and a sudo rule one asterisk too generous."
 
 - box: StreamIO
@@ -934,6 +1065,7 @@
   url: /2022/09/24/the-streaming-service-that-streamed-itself.html
   date: 2022-09-24
   tags: "sqli · rfi · laps"
+  chain: "recon web-enum sqli mssql union-injection waf-bypass hash-cracking lfi php-filter-chain rfi rce webshell config-leak cred-reuse winrm firefox-creds bloodhound writeowner acl-abuse laps ldap"
   blurb: "A search box bleeds the user table, a forgotten debug flag runs your code, and a saved Firefox password walks you all the way to the domain."
 
 - box: Support
@@ -941,6 +1073,7 @@
   url: /2022/12/24/the-help-desk-had-a-master-key.html
   date: 2022-12-24
   tags: "ldap · rbcd · kerberos"
+  chain: "recon smb-enum reversing ldap evil-winrm bloodhound acl-abuse rbcd secretsdump"
   blurb: "A reversed support tool leaks one password, an LDAP comment field leaks another, and a help desk's quiet authority over the domain controller mints a fake computer that becomes Administrator."
 
 - box: Talkative
@@ -948,6 +1081,7 @@
   url: /2022/09/03/five-rooms-and-a-stolen-key.html
   date: 2022-09-03
   tags: "ssti · pivoting · container-escape"
+  chain: "recon jamovi rce bolt ssti cred-reuse mongodb rocketchat container-escape"
   blurb: "A statistics tool runs your code, a saved file leaks every password, and four containers later a forgotten Linux capability reads the host's secrets through the floorboards."
 
 - box: Tally
@@ -955,6 +1089,7 @@
   url: /2018/05/12/the-ledger-that-audited-itself.html
   date: 2018-05-12
   tags: "sharepoint · keepass · potato"
+  chain: "file-not-found"
   blurb: "A Hard Windows box that is one long paper trail: a SharePoint library leaks an FTP password, the FTP hides a KeePass vault, the vault opens a share, the share hides a database password, and the database hands you a shell you escalate twice over."
 
 - box: Time
@@ -962,6 +1097,7 @@
   url: /2021/04/10/the-error-message-was-the-map.html
   date: 2021-04-10
   tags: "deserialization · jdbc · systemd-timer"
+  chain: "recon web-enum info-disclosure insecure-deserialization cve-2019-12384 jackson h2-runscript rce reverse-shell writable-path"
   blurb: "A JSON validator confesses its engine in an error message, that engine deserializes a database driver into a shell, and a world-writable backup script ticks you to root every few seconds."
 
 - box: Timelapse
@@ -969,6 +1105,7 @@
   url: /2022/08/27/a-key-left-in-the-backup.html
   date: 2022-08-27
   tags: "smb-loot · pfx-cert · laps"
+  chain: "recon smb-enum hash-cracking laps"
   blurb: "An easy Active Directory box that is really a lecture on secrets that outlive the cleanup: a certificate in a backup zip, a password typed into history, and LAPS handing out the admin key to whoever was on the list."
 
 - box: Traverxec
@@ -976,6 +1113,7 @@
   url: /2020/04/18/the-slash-that-walked-backward.html
   date: 2020-04-18
   tags: "rce · path-traversal · gtfobins"
+  chain: "recon nostromo cve-2019-16278 path-traversal rce config-leak hash-cracking sudo gtfobins"
   blurb: "An off-brand web server reads an attacker's poisoned path into a command, a backup nobody deleted leaks david's keys, and journalctl's own pager hands over root."
 
 - box: Wall
@@ -983,6 +1121,7 @@
   url: /2019/12/14/the-limit-was-a-suggestion.html
   date: 2019-12-14
   tags: "verb-tampering · waf-bypass · suid"
+  chain: "web-enum auth-bypass centreon brute-force cve-2019-13024 waf-bypass reversing suid cve-2017-5618 ld-preload"
   blurb: "A login guards GET and forgets POST, a firewall hates spaces but loves ${IFS}, and an old screen binary hands over root."
 
 - box: Writer
@@ -990,6 +1129,7 @@
   url: /2021/12/18/the-house-that-wrote-itself.html
   date: 2021-12-18
   tags: "sqli · command-injection · postfix"
+  chain: "web-enum sqli auth-bypass command-injection config-leak hash-cracking writable-path cron"
   blurb: "A login bypass that turns into a file reader, a filename that turns into a shell, and a mail disclaimer that signs every message and one stolen account."
 
 - box: Writeup
@@ -997,6 +1137,7 @@
   url: /2019/10/19/the-page-that-logged-itself-in.html
   date: 2019-10-19
   tags: "sqli · path-hijack · privesc"
+  chain: "recon web-enum cms-made-simple cve-2019-9053 blind-sqli hash-cracking cred-reuse pspy path-hijack suid"
   blurb: "A blind SQL injection bleeds an admin hash out of CMS Made Simple, and a group membership lets you write the very command root runs when it greets you at login."
 
 - box: Object
@@ -1004,12 +1145,5 @@
   url: /2022/03/07/notes-passed-under-the-door.html
   date: 2022-03-07
   tags: "jenkins · credential-decrypt · acl-abuse"
+  chain: "recon jenkins rce config-leak bloodhound acl-abuse"
   blurb: "A firewalled Jenkins runs your commands but can never call home, so you read its output from files, decrypt its stored secrets, then walk an Active Directory permission chain to Domain Admin."
-
-- box: ZZTOPSECRET
-  difficulty: Insane
-  url: /9999/01/01/staged-self-test.html
-  date: 2099-01-01
-  tags: "staged · hidden · selftest"
-  blurb: "Temporary hidden entry to prove the staging filter. Must never render publicly."
-  hidden: true
