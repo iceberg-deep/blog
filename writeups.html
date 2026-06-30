@@ -1,0 +1,14 @@
+---
+layout: default
+title: Write-ups
+permalink: /writeups/
+description: "Hack The Box write-ups — the full archive, newest first. Real walkthroughs in plain language, the way I wish someone had handed them to me."
+---
+
+<div class="sec-head" style="margin-top:34px;margin-bottom:22px"><h2><span class="hash">#</span> Write-ups</h2><div class="line"></div></div>
+
+<div class="grid">
+  {% assign wus = site.data.writeups | sort: "date" | reverse %}
+  {% for wu in wus %}{% include writeup-card.html wu=wu %}
+  {% endfor %}
+</div>

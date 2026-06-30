@@ -1,0 +1,57 @@
+{%- comment -%}
+  Privacy-friendly analytics (GoatCounter). Dashboard-only — no cookies,
+  no personal data. Inert until site.goatcounter is set in _config.yml.
+
+  Self-exclusion: the footer "exclude this device" link, or visiting any page
+  with the #gc-toggle hash (bookmarkable), sets the localStorage key
+  `skipgc='t'` that GoatCounter's count.js checks before counting.
+
+  View badge: fills any #gc-views element from the public /counter/<path>.json
+  endpoint (must be enabled in GoatCounter Settings: "Allow visitors to see
+  the total counts").
+{%- endcomment -%}
+{%- if site.goatcounter and site.goatcounter != "" -%}
+<script data-goatcounter="https://{{ site.goatcounter }}.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script>
+(function(){
+  var SKIP = 'skipgc';
+
+  // Bookmarkable toggle: open any page with #gc-toggle in the URL to flip
+  // exclusion on this device. Bookmark e.g. https://iceberg-deep.github.io/blog/#gc-toggle
+  if (location.hash === '#gc-toggle') {
+    if (localStorage.getItem(SKIP) === 't') {
+      localStorage.removeItem(SKIP);
+      alert('GoatCounter: counting RE-ENABLED on this device.');
+    } else {
+      localStorage.setItem(SKIP, 't');
+      alert('GoatCounter: counting DISABLED on this device.');
+    }
+  }
+
+  // Self-exclusion toggle (footer link)
+  var ex = document.getElementById('gc-exclude');
+  if (ex) {
+    var KEY = SKIP;
+    var paint = function(){ ex.textContent = localStorage.getItem(KEY) === 't' ? 'counting off here' : 'exclude this device'; };
+    paint();
+    ex.addEventListener('click', function(e){
+      e.preventDefault();
+      if (localStorage.getItem(KEY) === 't') localStorage.removeItem(KEY);
+      else localStorage.setItem(KEY, 't');
+      paint();
+    });
+  }
+
+  // View-count badge. GoatCounter returns 404 with {"count":"0"} for paths
+  // with no views yet, so parse the body regardless of status.
+  var v = document.getElementById('gc-views');
+  if (v) {
+    var url = 'https://{{ site.goatcounter }}.goatcounter.com/counter/' + location.pathname + '.json';
+    fetch(url).then(function(r){ return r.json(); }).then(function(d){
+      if (d && d.count != null) { v.textContent = d.count + (d.count === '1' ? ' view' : ' views'); }
+    }).catch(function(){});
+  }
+})();
+</script>
+{%- endif -%}

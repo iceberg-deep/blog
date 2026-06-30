@@ -1,0 +1,22 @@
+---
+layout: default
+title: Blog
+permalink: /blog/
+description: "Iceberg-Deep — Breaking ● Building ● working"
+---
+
+<div class="sec-head" style="margin-top:34px;margin-bottom:22px"><h2><span class="hash">#</span> Blog</h2><div class="line"></div></div>
+
+{% if site.posts.size > 0 %}
+<div class="posts">
+  {% for post in site.posts %}
+  <a class="post-card" href="{{ post.url | relative_url }}">
+    <div class="date">{{ post.date | date: "%b %d, %Y" }}</div>{% if post.tags.size > 0 %}<div class="ptags">{{ post.tags | join: " · " }}</div>{% endif %}
+    <h3>{{ post.card_title | default: post.title }}</h3>
+    <p>{{ post.excerpt | strip_html | truncate: 200 }}</p>
+  </a>
+  {% endfor %}
+</div>
+{% else %}
+<div class="empty">No posts yet — first note coming soon.</div>
+{% endif %}

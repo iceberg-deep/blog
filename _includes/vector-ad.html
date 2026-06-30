@@ -1,0 +1,41 @@
+{%- comment -%}
+  Vector promo card. Self-contained + scoped under .vec-ad so its purple theme
+  does not bleed into the blog's green theme (and vice-versa). Flat fills, no glow.
+  Drop in with {% include vector-ad.html %}. No personal name/email in markup.
+{%- endcomment -%}
+<style>
+.vec-ad{margin:30px 0;font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.vec-ad *{box-sizing:border-box}
+.vec-ad__card{background:#0B0714;border:1px solid #B026FF;border-radius:13px;padding:26px 28px;color:#E8E0FF;overflow:hidden}
+.vec-ad__eyebrow{margin:0 0 12px;font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#22E0FF}
+.vec-ad__wordmark{display:inline-block;margin:0;font-family:system-ui,'Segoe UI',Roboto,sans-serif;font-weight:800;font-size:34px;line-height:1;letter-spacing:.5px;color:#FFFFFF}
+.vec-ad__bar{display:block;width:52px;height:4px;background:#B026FF;border-radius:2px;margin:10px 0 16px}
+.vec-ad__tagline{margin:0 0 14px;font-family:system-ui,'Segoe UI',Roboto,sans-serif;font-size:16px;line-height:1.4;color:#EDE6FF}
+.vec-ad__path{margin:0 0 14px;font-size:13px;font-weight:600;letter-spacing:.02em}
+.vec-ad__from{color:#22E0FF}
+.vec-ad__arrow{color:#6E5A93;margin:0 9px}
+.vec-ad__to{color:#3DF07A}
+.vec-ad__substance{margin:0 0 20px;font-size:13.5px;line-height:1.65;color:#B7A6DA}
+.vec-ad__cta{display:inline-block;background:#B026FF;color:#0B0714;font-family:system-ui,'Segoe UI',Roboto,sans-serif;font-weight:700;font-size:14px;text-decoration:none;padding:12px 22px;border-radius:9px;transition:background .15s ease}
+.vec-ad__cta:hover{background:#C24DFF;color:#0B0714}
+.vec-ad__beta{margin:16px 0 0;font-size:12px;line-height:1.5;color:#9C8FBF}
+.vec-ad__beta b{color:#FF2A6D;font-weight:600}
+@media(max-width:420px){
+  .vec-ad__card{padding:22px 20px}
+  .vec-ad__wordmark{font-size:30px}
+  .vec-ad__tagline{font-size:15px}
+  .vec-ad__cta{display:block;text-align:center}
+}
+</style>
+<aside class="vec-ad" aria-label="Vector — closed beta">
+  <div class="vec-ad__card">
+    <p class="vec-ad__eyebrow">Closed Beta · Now Recruiting</p>
+    <p class="vec-ad__wordmark">Vector</p>
+    <span class="vec-ad__bar" aria-hidden="true"></span>
+    <p class="vec-ad__tagline">A pocket-sized web app hacking trainer.</p>
+    <p class="vec-ad__path"><span class="vec-ad__from">intermediate</span><span class="vec-ad__arrow" aria-hidden="true">&rarr;</span><span class="vec-ad__to">subject-matter expert</span></p>
+    <p class="vec-ad__substance">Injection, XSS, SSRF, JWT &amp; auth bypass, request smuggling, race conditions &mdash; annotated real requests and in-app labs, not slideware.</p>
+    <a class="vec-ad__cta" href="https://iceberg-deep.github.io/vector-preview/" target="_blank" rel="noopener">Try the preview &rarr;</a>
+    <p class="vec-ad__beta">Comment to join the closed beta · first wave gets <b>free Pro for life.</b></p>
+  </div>
+</aside>

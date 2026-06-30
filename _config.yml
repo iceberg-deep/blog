@@ -1,0 +1,8 @@
+title: Iceberg-Deep — Breaking ● Building ● working
+description: Breaking ● Building ● working — by Iceberg-Deep
+author: Iceberg-Deep
+default_image: /assets/og/default.png
+goatcounter: "iceberg-deep"   # privacy-friendly analytics at iceberg-deep.goatcounter.com
+baseurl: "/blog"
+url: "https://iceberg-deep.github.io"
+future: true   # publish posts even if their date is ahead of build time
