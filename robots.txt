@@ -1,0 +1,7 @@
+---
+# served at /blog/robots.txt — points crawlers at the sitemap
+---
+User-agent: *
+Allow: /
+
+Sitemap: {{ "/sitemap.xml" | absolute_url }}

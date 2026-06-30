@@ -123,7 +123,7 @@ Picture a security guard whose job is to scan every letter for threatening langu
 So you craft a single ticket reason that does two jobs at once. It carries enough XSS-flavored junk to make the model score it as a threat (which is the entry ticket to the vulnerable branch), and it carries a Python expression for `eval` to run once it gets there. The Python half copies `bash`, marks the copy set-user-id root, and leaves it sitting on disk.
 
 ```
-iceberg=exec("import os; os.system('cp /bin/bash /tmp/iceberg; chmod 4777 /tmp/iceberg')");#<script src=http://10.10.14.4/x.js></script>
+iceberg=exec("[ python one-liner: copy /bin/bash to /tmp/iceberg and mark the copy setuid-root ]");#<script src=http://10.10.14.4/x.js></script>
 ```
 
 Submit that as a ticket reason so it lands in the database, then let the root script chew on it.

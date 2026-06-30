@@ -6,3 +6,8 @@ goatcounter: "iceberg-deep"   # privacy-friendly analytics at iceberg-deep.goatc
 baseurl: "/blog"
 url: "https://iceberg-deep.github.io"
 future: true   # publish posts even if their date is ahead of build time
+
+# SEO / search-engine discoverability
+plugins:
+  - jekyll-sitemap         # auto-generates /sitemap.xml so Google/Bing can find every page
+# google_site_verification: "PASTE-TOKEN-HERE"   # uncomment + set to verify ownership in Google Search Console

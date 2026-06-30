@@ -16,3 +16,6 @@ _drafts/htb_manifest.md
 *.bin
 *.msi
 *.so
+
+# drafts / staged active boxes stay local-only until retirement
+_drafts/
