@@ -9,3 +9,10 @@ _drafts/hackthebox.zip
 _drafts/hackthebox_extracted/
 _drafts/htb_notion/
 _drafts/htb_manifest.md
+
+# never ship binaries in a public blog
+*.exe
+*.dll
+*.bin
+*.msi
+*.so
