@@ -2,13 +2,59 @@
 layout: default
 title: Write-ups
 permalink: /writeups/
-description: "Hack The Box write-ups — the full archive, newest first. Real walkthroughs in plain language, the way I wish someone had handed them to me."
+description: "Hack The Box write-ups — the full archive, newest first. Search by box name or attack technique (ssrf, rce, bof, lfi, kerberos, sqli). Real walkthroughs in plain language, the way I wish someone had handed them to me."
 ---
 
-<div class="sec-head" style="margin-top:34px;margin-bottom:22px"><h2><span class="hash">#</span> Write-ups</h2><div class="line"></div></div>
+<div class="sec-head" style="margin-top:34px;margin-bottom:18px"><h2><span class="hash">#</span> Write-ups</h2><div class="line"></div></div>
 
-<div class="grid">
+<div class="wu-search">
+  <span class="wu-prompt">$ grep</span>
+  <input id="wuq" type="search" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Search write-ups by box or technique" placeholder="search by box or technique — ssrf, rce, bof, lfi, kerberos, sqli, Active…">
+  <span id="wuc" class="wu-count"></span>
+</div>
+
+<div class="grid" id="wugrid">
   {% assign wus = site.data.writeups | sort: "date" | reverse %}
   {% for wu in wus %}{% include writeup-card.html wu=wu %}
   {% endfor %}
 </div>
+
+<div id="wunone" class="wu-none" hidden>nothing matches <b></b>. try a technique like <code>rce</code>, <code>lfi</code>, <code>kerberos</code>, <code>bof</code>, or a box name.</div>
+
+<style>
+.wu-search{display:flex;align-items:center;gap:10px;margin:0 0 22px;background:var(--panel);
+  border:1px solid var(--border);border-radius:11px;padding:11px 14px;transition:border-color .15s,box-shadow .15s}
+.wu-search:focus-within{border-color:var(--border-hi);box-shadow:0 0 0 1px var(--border-hi)}
+.wu-prompt{font-family:var(--mono);color:var(--accent);font-size:14px;flex:none;opacity:.85;user-select:none}
+#wuq{flex:1;min-width:0;background:transparent;border:0;outline:0;color:var(--text);
+  font-family:var(--mono);font-size:14.5px;padding:2px 0}
+#wuq::placeholder{color:var(--muted)}
+#wuq::-webkit-search-cancel-button{filter:grayscale(1) brightness(1.6);cursor:pointer}
+.wu-count{font-family:var(--mono);font-size:12px;color:var(--muted);flex:none;white-space:nowrap}
+.wu-none{font-family:var(--mono);color:var(--muted);font-size:14px;padding:26px 4px;text-align:center}
+.wu-none b{color:var(--accent)} .wu-none code{color:var(--text);background:var(--panel);padding:1px 5px;border-radius:4px}
+</style>
+
+<script>
+(function(){
+  var q=document.getElementById('wuq'),grid=document.getElementById('wugrid'),
+      cnt=document.getElementById('wuc'),none=document.getElementById('wunone'),
+      cards=[].slice.call(grid.getElementsByClassName('card')),total=cards.length;
+  function run(){
+    var v=q.value.trim().toLowerCase(),terms=v?v.split(/\s+/):[],shown=0;
+    for(var i=0;i<total;i++){
+      var hay=cards[i].getAttribute('data-s')||'';
+      var ok=terms.every(function(t){return hay.indexOf(t)>-1;});
+      cards[i].style.display=ok?'':'none'; if(ok)shown++;
+    }
+    cnt.textContent=v?(shown+' / '+total):(total+' write-ups');
+    none.hidden=shown>0||!v;
+    if(!none.hidden){none.querySelector('b').textContent='"'+v+'"';}
+  }
+  q.addEventListener('input',run);
+  // deep link: /writeups/?q=rce  or  /writeups/#kerberos
+  var pre=(location.search.match(/[?&]q=([^&]+)/)||[])[1]||location.hash.slice(1);
+  if(pre){q.value=decodeURIComponent(pre.replace(/\+/g,' '));}
+  run(); q.focus({preventScroll:true});
+})();
+</script>
