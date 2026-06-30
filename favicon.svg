@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Iceberg-Deep">
+  <rect width="64" height="64" rx="14" fill="#0b0f0a"/>
+  <!-- submerged bulk: the deep, dim part below the waterline -->
+  <path d="M15 34 H49 L41 56 H23 Z" fill="#496320"/>
+  <path d="M24 34 H40 L36 49 H28 Z" fill="#5d7e2a"/>
+  <!-- waterline -->
+  <rect x="11" y="31.5" width="42" height="2.6" rx="1.3" fill="#C2F761" opacity=".55"/>
+  <!-- tip above water: bright -->
+  <path d="M32 9 L45 32 H19 Z" fill="#C2F761"/>
+  <path d="M32 9 L45 32 H32 Z" fill="#a7df49"/>
+</svg>
