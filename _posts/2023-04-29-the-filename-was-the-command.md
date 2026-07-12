@@ -60,7 +60,7 @@ ping -c 1 10.10.14.4|
 10.10.10.197 > 10.10.14.4: ICMP echo request
 ```
 
-The echo lands. The site read the name, saw the pipe, and ran `ping`. Now trade the ping for a real callback. I am not printing a runnable reverse shell, and that restraint is the point, not laziness. The filename can only hold so much, so the usual move is to base64 a one-liner and decode it on the far side.
+The echo lands. The site read the name, saw the pipe, and ran `ping`. Now trade the ping for a real callback. A filename only holds so many characters, so the usual move is to base64 a one-liner and decode it on the far side. I'm leaving the shell itself as a bracketed placeholder; build your own in a lab, don't lift a live one off a write-up.
 
 ```
 # filename, conceptually:

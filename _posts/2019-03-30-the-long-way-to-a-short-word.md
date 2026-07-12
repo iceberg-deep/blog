@@ -103,7 +103,7 @@ Name,Mobile,Email,Group code,Tags
 <?php [ one-line webshell: run the system command from the User-Agent header ] ?>,2,,,
 ```
 
-I am describing the row rather than printing it, and that restraint is the whole point. A working playSMS template-injection line is a textbook backdoor, and the second it touches disk a decent scanner flags the file as malware, which is the loudest possible argument for how dangerous it is. So picture it. The mechanism is a clerk who files your business card into a binder, except this binder reads anything you wrote in the "company" box out loud to the kitchen, and the kitchen does it.
+The mechanism is a clerk who files your business card into a binder, except this binder reads whatever you wrote in the "company" box out loud to the kitchen, and the kitchen does it. The row above stays bracketed for the obvious reason: a real template-injection one-liner is working malware, and a write-up is meant to show you the trick, not hand you a copy of the weapon.
 
 Import the list, then send one request with your reverse shell tucked into the User-Agent.
 
