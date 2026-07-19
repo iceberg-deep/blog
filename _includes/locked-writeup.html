@@ -1,0 +1,78 @@
+<!-- Passphrase gate for still-active HTB boxes. The post ships a plaintext teaser
+     (indexed for SEO) plus a <script type="application/json" id="lock-data"> blob
+     produced by scripts/lock-writeup.js. On the right passphrase the body is
+     decrypted in-browser (crypto.subtle) and rendered with a tiny markdown pass
+     that emits the same tags .article already styles. Nothing sensitive exists in
+     the DOM until then. Swap this include for the plaintext body at retirement. -->
+<style>
+.lock-gate{border:1px solid var(--border-hi);border-radius:12px;padding:22px 24px;margin:24px 0;
+  background:linear-gradient(180deg,var(--panel),var(--bg2));font-family:var(--mono)}
+.lock-gate .seal{font-size:15px;color:var(--accent);margin-bottom:6px}
+.lock-gate p{color:var(--muted);font-size:13.5px;margin:0 0 14px;line-height:1.6}
+.lock-gate .row{display:flex;gap:10px;flex-wrap:wrap}
+.lock-gate input{flex:1;min-width:180px;font-family:var(--mono);font-size:14px;color:var(--text);
+  background:#070b07;border:1px solid var(--border);border-radius:8px;padding:12px 14px}
+.lock-gate input:focus{outline:none;border-color:var(--border-hi)}
+.lock-gate button{font-family:var(--mono);font-size:14px;color:var(--bg);font-weight:700;cursor:pointer;
+  background:var(--accent);border:0;border-radius:8px;padding:12px 22px;transition:.18s}
+.lock-gate button:hover{background:#fff}
+.lock-gate .err{color:var(--insane);font-size:12.5px;margin:12px 0 0}
+</style>
+<div class="lock-gate" id="lockGate">
+  <div class="seal">🔒 sealed while the box is live</div>
+  <p>This box is still active on Hack The Box, so the full chain is encrypted. It unseals on retirement. If you hold the passphrase, drop it in.</p>
+  <div class="row">
+    <input type="password" id="lockPw" placeholder="passphrase" autocomplete="off" spellcheck="false" aria-label="passphrase">
+    <button type="button" id="lockGo">unseal</button>
+  </div>
+  <p class="err" id="lockErr" hidden>wrong passphrase.</p>
+</div>
+<div id="lockBody"></div>
+<script>
+(function(){
+  var blob = JSON.parse(document.getElementById('lock-data').textContent);
+  var gate = document.getElementById('lockGate');
+  var body = document.getElementById('lockBody');
+  var pw = document.getElementById('lockPw');
+  var err = document.getElementById('lockErr');
+  var b64 = function(s){ return Uint8Array.from(atob(s), function(c){ return c.charCodeAt(0); }); };
+
+  function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function inline(s){ return esc(s)
+      .replace(/`([^`]+)`/g, function(m,c){ return '<code>'+c+'</code>'; })
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>'); }
+  // Renders the subset the write-ups use: bare ``` fences, ## headings, ---, > quotes, **bold**, `code`.
+  function render(md){
+    var parts = md.split('```'), out = '';
+    for (var i=0;i<parts.length;i++){
+      if (i%2===1){ out += '<pre><code>'+esc(parts[i].replace(/^\n/,'').replace(/\n$/,''))+'</code></pre>'; continue; }
+      var blocks = parts[i].split(/\n{2,}/);
+      for (var j=0;j<blocks.length;j++){
+        var b = blocks[j].replace(/^\n+|\n+$/g,''); if (!b) continue;
+        var h = b.match(/^(#{1,6})\s+([\s\S]*)$/);
+        if (h){ var n=h[1].length; out += '<h'+n+'>'+inline(h[2])+'</h'+n+'>'; }
+        else if (/^-{3,}$/.test(b)){ out += '<hr>'; }
+        else if (/^>\s/.test(b)){ out += '<blockquote>'+inline(b.replace(/^>\s?/gm,''))+'</blockquote>'; }
+        else { out += '<p>'+inline(b).replace(/\n/g,'<br>')+'</p>'; }
+      }
+    }
+    return out;
+  }
+
+  async function unseal(){
+    err.hidden = true;
+    try {
+      var km = await crypto.subtle.importKey('raw', new TextEncoder().encode(pw.value), 'PBKDF2', false, ['deriveKey']);
+      var key = await crypto.subtle.deriveKey(
+        { name:'PBKDF2', salt:b64(blob.salt), iterations:blob.iter, hash:'SHA-256' },
+        km, { name:'AES-GCM', length:256 }, false, ['decrypt']);
+      var pt = await crypto.subtle.decrypt({ name:'AES-GCM', iv:b64(blob.iv) }, key, b64(blob.ct));
+      body.innerHTML = render(new TextDecoder().decode(pt));
+      gate.hidden = true;
+      body.scrollIntoView({ behavior:'smooth', block:'start' });
+    } catch(e){ err.hidden = false; pw.value=''; pw.focus(); }
+  }
+  document.getElementById('lockGo').addEventListener('click', unseal);
+  pw.addEventListener('keydown', function(e){ if (e.key==='Enter') unseal(); });
+})();
+</script>

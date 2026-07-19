@@ -12,6 +12,14 @@
 #   - RELEASE when the box retires: move the page into _posts/ dated retire+7,
 #     then delete the  hidden: true  line (or set hidden: false) and push.
 
+- box: Silentium
+  difficulty: Easy
+  url: /2026/07/18/the-box-that-refused-to-answer.html
+  date: 2026-07-18
+  tags: "flowise · docker · gogs"
+  chain: "recon vhost-fuzzing flowise password-reset-token-leak code-eval rce no-egress timing-oracle static-file-exfil container-env-leak cred-pivot ssh gogs symlink-write sudoers"
+  blurb: "An easy Linux box that cut its own phone line. Break into a staging AI app, run code you can't hear back from, then smuggle the box's own secrets out the one port it left open. Sealed while the box is live on HTB."
+
 - box: RopeTwo
   difficulty: Insane
   url: /2021/01/23/all-the-way-down.html
