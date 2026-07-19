@@ -10,4 +10,4 @@ future: true   # publish posts even if their date is ahead of build time
 # SEO / search-engine discoverability
 plugins:
   - jekyll-sitemap         # auto-generates /sitemap.xml so Google/Bing can find every page
-# google_site_verification: "PASTE-TOKEN-HERE"   # uncomment + set to verify ownership in Google Search Console
+google_site_verification: "iYgz7ThggDYAiwOi4TOJoY_iv52Qd3BrvaYf-RYa6s8"   # verifies ownership in Google Search Console (also verified via /googlef5e6aa84c92f85d9.html)
