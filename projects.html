@@ -1,0 +1,96 @@
+---
+layout: default
+title: Projects
+permalink: /projects/
+description: "What Iceberg-Deep is building on GitHub — security tooling, web apps, and experiments, pulled live from the source."
+---
+
+<div class="sec-head" style="margin-top:34px;margin-bottom:18px"><h2><span class="hash">#</span> Projects</h2><div class="line"></div></div>
+
+<p class="proj-intro">What I'm building, pulled live from GitHub. Newest work first.</p>
+
+<div class="grid" id="projgrid" aria-live="polite">
+  <div class="proj-status" id="projstatus">loading projects from github…</div>
+</div>
+
+<style>
+.proj-intro{color:var(--muted);font-family:var(--mono);font-size:13.5px;margin:0 0 22px}
+.proj-status{grid-column:1/-1;border:1px dashed var(--border);border-radius:12px;padding:26px;
+  text-align:center;color:var(--muted);font-family:var(--mono);font-size:13px}
+.proj-status a{color:var(--accent)}
+.card.repo .stars{font-family:var(--mono);font-size:12px;color:var(--accent-dim);flex:none;white-space:nowrap}
+.card.repo .badge.arch{color:var(--muted);font-size:10px}
+.repo-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:14px}
+.repo-meta .lang{display:inline-flex;align-items:center;gap:6px}
+.repo-meta .ldot{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}
+</style>
+
+<script>
+(function(){
+  var USER = 'iceberg-deep';
+  // Hand-picked, in display order. Edit this list to curate the page.
+  // Forks are excluded from your GitHub anyway; add any owner repo by name.
+  // Also available to add: portfolio, vector-preview, cortex-preview, volt-preview,
+  //   ledgr-preview, wordpressure, pentester, honeypot, cis006-intro-to-programming.
+  var FEATURED = [
+    'blog',
+    'lock-school',
+    'vanish',
+    'pmms',
+    'lateral-p455',
+    'discord-votemaster',
+    'inscope',
+    'bb-sentinel',
+    'iceberg-rig'
+  ];
+
+  // GitHub linguist colors for the languages likely to show up (fallback = grey).
+  var LANG = {HTML:'#e34c26',CSS:'#563d7c',JavaScript:'#f1e05a',TypeScript:'#3178c6',
+    Python:'#3572A5',Ruby:'#701516',Shell:'#89e051','C++':'#f34b7d',C:'#555555',
+    Go:'#00ADD8',Rust:'#dea584',Java:'#b07219',PHP:'#4F5D95',Vue:'#41b883',
+    Dockerfile:'#384d54','Jupyter Notebook':'#DA5B0B'};
+
+  var grid = document.getElementById('projgrid');
+  var status = document.getElementById('projstatus');
+
+  function esc(s){ return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function ago(iso){
+    var d = (Date.now() - new Date(iso).getTime())/1000;
+    if (d < 3600)   return Math.max(1,Math.round(d/60))+'m ago';
+    if (d < 86400)  return Math.round(d/3600)+'h ago';
+    if (d < 2592000)return Math.round(d/86400)+'d ago';
+    if (d < 31536000)return Math.round(d/2592000)+'mo ago';
+    return Math.round(d/31536000)+'y ago';
+  }
+  function card(r){
+    var color = LANG[r.language] || '#8b949e';
+    return '<a class="card repo" href="'+esc(r.html_url)+'" target="_blank" rel="noopener">'
+      + '<div class="top"><h3>'+esc(r.name)
+        + (r.archived?' <span class="badge arch">archived</span>':'')+'</h3>'
+        + (r.stargazers_count?'<span class="stars">★ '+r.stargazers_count+'</span>':'')+'</div>'
+      + '<p>'+esc(r.description || 'No description yet.')+'</p>'
+      + '<div class="repo-meta">'
+        + (r.language?'<span class="lang"><i class="ldot" style="background:'+color+'"></i>'+esc(r.language)+'</span>':'')
+        + '<span class="upd">updated '+ago(r.pushed_at)+'</span>'
+      + '</div>'
+      + '<span class="go">View on GitHub →</span></a>';
+  }
+
+  // One request for the whole public repo list, then render FEATURED in order.
+  fetch('https://api.github.com/users/'+USER+'/repos?per_page=100&sort=pushed&type=owner')
+    .then(function(res){ if(!res.ok) throw new Error('http '+res.status); return res.json(); })
+    .then(function(list){
+      if(!Array.isArray(list)) throw new Error('unexpected response');
+      var by = {}; list.forEach(function(r){ by[r.name.toLowerCase()] = r; });
+      var repos = FEATURED.map(function(n){ return by[n.toLowerCase()]; }).filter(Boolean);
+      if(!repos.length){ status.textContent = 'no matching repos found.'; return; }
+      grid.innerHTML = repos.map(card).join('');
+    })
+    .catch(function(){
+      // Anonymous GitHub API is 60 req/hr per IP; a rate-limited visitor lands here.
+      status.innerHTML = "couldn't reach GitHub right now (it rate-limits anonymous requests). "
+        + 'see everything at <a href="https://github.com/'+USER+'?tab=repositories" target="_blank" rel="noopener">github.com/'+USER+'</a>.';
+    });
+})();
+</script>
