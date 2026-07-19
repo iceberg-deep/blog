@@ -16,6 +16,7 @@
   difficulty: Easy
   url: /2026/07/18/the-box-that-refused-to-answer.html
   date: 2026-07-18
+  sealed: true
   tags: "flowise · docker · gogs"
   chain: "recon vhost-fuzzing flowise password-reset-token-leak code-eval rce no-egress timing-oracle static-file-exfil container-env-leak cred-pivot ssh gogs symlink-write sudoers"
   blurb: "An easy Linux box that cut its own phone line. Break into a staging AI app, run code you can't hear back from, then smuggle the box's own secrets out the one port it left open. Sealed while the box is live on HTB."
@@ -24,6 +25,7 @@
   difficulty: Medium
   url: /2026/07/11/the-inspector-that-ran-your-slip.html
   date: 2026-07-11
+  sealed: true
   tags: "mcp · jupyter · flask"
   chain: "recon mcpjam-inspector unauth-rce stdio-spawn no-egress blind-exfil tool-description-oracle authorized-keys-plant ssh jupyter-token-leak process-args kernel-exec source-read-api-key opsmcp hidden-tool root-key-dump"
   blurb: "A medium Linux box built as a ladder of MCP services, each running as the next user up. Break in through a debug console left facing the street, make a blind box hold its answers up to the glass, then walk a leaked token and a published key all the way to root. Sealed while the box is live on HTB."
@@ -32,6 +34,7 @@
   difficulty: Easy
   url: /2026/07/12/the-folder-nobody-locked.html
   date: 2026-07-12
+  sealed: true
   tags: "nfs · command-injection · olivetin"
   chain: "nfs-leak password-reuse pop3 openstamanager cve-2025-69212 command-injection blind-rce egress-filter in-band-exfil bcrypt-crack ssh-key-pivot olivetin argument-injection root"
   blurb: "An easy Linux box where a world-readable NFS share leaks a new hire's password, one reused credential opens the mail and an internal portal, an invoice-import bug gives blind RCE behind a cut phone line, and a root-owned OliveTin action that never locked one argument hands over root. Sealed while the box is live on HTB."
@@ -40,6 +43,7 @@
   difficulty: Easy
   url: /2026/07/13/the-rooms-the-wildcard-named.html
   date: 2026-07-13
+  sealed: true
   tags: "mcp · docker · password-reuse"
   chain: "wildcard-vhost mcpjam-unauth-rce in-band-exfil privatebin-include-rce cred-reuse arcane docker-root"
   blurb: "An easy Linux box where a wildcard cert leaks its vhosts, an unauthenticated MCP inspector spawns commands, and a database password reused as a root Docker-manager admin login rides straight to root. Sealed while the box is live on HTB."
@@ -48,6 +52,7 @@
   difficulty: Medium
   url: /2026/07/14/the-key-that-shipped-in-the-browser.html
   date: 2026-07-14
+  sealed: true
   tags: "wordpress · chrome devtools · ocr"
   chain: "forged-aes stored-xss review-bot plugin-upload wp-config-reuse chrome-cdp ocr-rce root"
   blurb: "A medium Linux WordPress box where the theme ships its AES key to the browser, a review bot is tricked into minting an admin, and the climb ends by smuggling PHP to root through an OCR service that reads your shell off a picture. Sealed while the box is live on HTB."
@@ -56,6 +61,7 @@
   difficulty: Hard
   url: /2026/07/15/the-archive-that-indicted-itself.html
   date: 2026-07-15
+  sealed: true
   tags: "lpd · pjl · scm_rights"
   chain: "lpd-injection bind-shell pjl-traversal fsupload fsdownload scm-rights fd-passing"
   blurb: "An LPD spooler that runs the job name you fill in, a PJL printer that reads and writes a floor above its sandbox, and a root daemon that hands an unprivileged user its own open file descriptor. Five polite services, five boundaries moved an inch. Sealed while the box is live on HTB."
@@ -64,6 +70,7 @@
   difficulty: Medium
   url: /2026/07/16/the-answer-came-back-as-an-error.html
   date: 2026-07-16
+  sealed: true
   tags: "next.js · deserialization · node-inspector"
   chain: "react2shell rsc-flight deserialization rce error-based-exfil sqlite md5-crack ssh node-inspector cdp root"
   blurb: "A Next.js dashboard with a single page and no routes, because its only door is the React Flight protocol. CVE-2025-55182 builds a function out of your request, the box answers through its own error page, and a debugger left running as root closes it out. Sealed while the box is live on HTB."
@@ -72,6 +79,7 @@
   difficulty: Medium
   url: /2026/07/17/the-model-that-ate-what-you-fed-it.html
   date: 2026-07-17
+  sealed: true
   tags: "mlflow · pickle-rce · sudo-pth"
   chain: "vhost-fuzz mlflow default-creds serve-artifacts pickle-deserialization rce blind-egress in-band-exfil ssh-key pth-code-exec sudo root"
   blurb: "An AI hiring front-end hides an MLflow server on a second vhost that still answers to the login it shipped with. Overwrite a model pickle for code execution, exfil in-band past a dead egress line, then let root run a .pth file that begins with import. Sealed while the box is live on HTB."

@@ -1,5 +1,5 @@
 <a class="card" href="{{ include.wu.url | relative_url }}" data-s="{{ include.wu.box | downcase }} {{ include.wu.tags | downcase }} {{ include.wu.chain | downcase }} {{ include.wu.difficulty | downcase }}">
-      <div class="top"><h3>{{ include.wu.box }}</h3><span class="badge {{ include.wu.difficulty | downcase }}">{{ include.wu.difficulty }}</span></div>
+      <div class="top"><h3>{{ include.wu.box }}{% if include.wu.sealed %} <span class="lock" title="sealed while the box is live">&#128274;</span>{% endif %}</h3><span class="badge {{ include.wu.difficulty | downcase }}">{{ include.wu.difficulty }}</span></div>
       <div class="tags">{{ include.wu.tags }}</div>
       <div class="date">{{ include.wu.date | date: "%b %-d, %Y" }}</div>
       <p>{{ include.wu.blurb }}</p>
