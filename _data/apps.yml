@@ -52,3 +52,14 @@
     Commercial door hardware the way the field uses it: exit devices, mortise
     and cylindrical locks, storefront hardware, cylinders and cores — parts by
     model, with real diagrams.
+
+# Not a learning app like the rest — the personal site. Kept last so the tools
+# read as a set and this doesn't get mistaken for one of them.
+- name: Portfolio
+  subject: Who's behind all this
+  url: https://iceberg-deep.github.io/portfolio/
+  status: live
+  blurb: >-
+    Detection-informed penetration tester, OSCP and Security+, ~4 years in
+    security operations moving into offensive security. 180 Hack The Box
+    write-ups, NCL Gold ×2, CodePath CTF 1st nationally.
