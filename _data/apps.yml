@@ -1,0 +1,54 @@
+# App index — drives the /apps/ page. Add an entry and the card appears.
+#
+# Each app is a separate deployment with its own repo and its own URL, so `url`
+# is ABSOLUTE here (relative_url would resolve inside the blog and 404).
+#
+# status controls the badge colour, and must be one of:
+#   live  — deployed and usable right now
+#   beta  — usable, still moving
+#   soon  — announced, no public URL yet (leave `url` empty)
+#
+# Blurbs are the app's own description, trimmed to card length. If you rewrite an
+# app's landing copy, update it here too — nothing syncs them automatically.
+
+- name: Volt
+  subject: Electricity & electronics
+  url: https://iceberg-deep.github.io/volt/
+  status: live
+  blurb: >-
+    The electrical learning app for people who actually work with electricity.
+    One subject, real depth, live simulations. Free fundamentals module forever.
+
+- name: Cortex
+  subject: Artificial intelligence
+  url: https://iceberg-deep.github.io/cortex-preview/
+  status: live
+  blurb: >-
+    A structured, multi-semester AI curriculum that fits in your pocket. Five
+    ways to learn every idea, with spaced repetition. Free to start.
+
+- name: Vector
+  subject: Web application security
+  url: https://iceberg-deep.github.io/vector-preview/
+  status: live
+  blurb: >-
+    Take a target you've never seen, decide what's actually exploitable, prove
+    it, and write up the finding. Injection, XSS, SSRF, XXE, auth and access,
+    request smuggling, race conditions. Intermediate to expert.
+
+- name: Ledgr
+  subject: Personal finance
+  url: https://iceberg-deep.github.io/ledgr-preview/
+  status: live
+  blurb: >-
+    Privacy-first personal finance. A transparent double-entry ledger that runs
+    on your device — your raw transactions never leave it.
+
+- name: Lock School
+  subject: Commercial door hardware
+  url: https://iceberg-deep.github.io/lock-school/
+  status: live
+  blurb: >-
+    Commercial door hardware the way the field uses it: exit devices, mortise
+    and cylindrical locks, storefront hardware, cylinders and cores — parts by
+    model, with real diagrams.

@@ -1,0 +1,41 @@
+---
+layout: default
+title: Apps
+permalink: /apps/
+description: "Every web app Iceberg-Deep has shipped — Volt, Cortex, Vector, Ledgr and Lock School. Open any of them in the browser, no install and no signup to look around."
+---
+
+<div class="sec-head" style="margin-top:34px;margin-bottom:18px"><h2><span class="hash">#</span> Apps</h2><div class="line"></div></div>
+
+<p class="apps-intro">Things I've built that you can actually open. All run in the browser — nothing to install, and you can look around before making an account.</p>
+
+<div class="grid">
+  {% for app in site.data.apps %}
+  {% if app.url and app.url != "" %}
+  <a class="card" href="{{ app.url }}">
+    <div class="top"><h3>{{ app.name }}</h3><span class="badge {{ app.status }}">{{ app.status }}</span></div>
+    <div class="tags">{{ app.subject }}</div>
+    <p>{{ app.blurb }}</p>
+    <span class="go">Open {{ app.name }} →</span>
+  </a>
+  {% else %}
+  <div class="card app-soon">
+    <div class="top"><h3>{{ app.name }}</h3><span class="badge {{ app.status }}">{{ app.status }}</span></div>
+    <div class="tags">{{ app.subject }}</div>
+    <p>{{ app.blurb }}</p>
+    <span class="go">Not published yet</span>
+  </div>
+  {% endif %}
+  {% endfor %}
+</div>
+
+<style>
+.apps-intro{color:var(--muted);font-family:var(--mono);font-size:13.5px;margin:0 0 22px;max-width:70ch;line-height:1.6}
+/* The shared .badge only ships difficulty colours; these are the app states. */
+.badge.live{color:var(--accent)}
+.badge.beta{color:var(--accent-dim)}
+/* A card with no URL isn't a link, so it shouldn't lift or look clickable. */
+.card.app-soon{opacity:.62}
+.card.app-soon:hover{border-color:var(--border);transform:none;box-shadow:none}
+.card.app-soon .go{color:var(--muted)}
+</style>
